@@ -1,0 +1,3 @@
+com\ecan\bean\User.class
+com\ecan\config\param\MineInfoConfigParam.class
+com\ecan\config\MineInfoAutoConfiguration.class
