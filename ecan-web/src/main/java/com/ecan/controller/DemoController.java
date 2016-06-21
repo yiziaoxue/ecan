@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import com.ecan.annotation.RequestLimit;
 import com.ecan.bean.User;
 import com.ecan.config.MineInfoAutoConfiguration;
 import com.ecan.service.UserService;
+
 
 /**
 * @author zhenhua.chun 
@@ -45,11 +47,13 @@ public class DemoController {
 	public String home(ModelMap map,HttpServletRequest request,@PathVariable("name") String name) throws UnknownHostException {
     	userService.sys();
     	User user = mineInfoAutoConfiguration.getMineInfo();
-    	System.out.println(user.getUsername()+user.getPassword());
+    	System.out.println(user.getPassword());
+    	System.out.println("name:"+name);
 //    	redisUtil.set(name, user.getUsername());
 //    	mongoTemplate.insert(user,"user");
-    	map.addAttribute("host", "阿尔萨斯重振天灾军团");
+    	map.addAttribute("host", name);
 //    	System.out.println("Mysql_Name: "+jdbcTemplate.getDataSource());
     	return "login";
 	 }
+    
 }

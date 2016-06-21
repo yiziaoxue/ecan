@@ -28,7 +28,6 @@ public class MineInfoAutoConfiguration {
 	@ConditionalOnMissingBean
 	public User getMineInfo() throws UnknownHostException {
 		User u = new User();
-		u.setUsername(mineInfo.getName());
 		u.setPassword(mineInfo.getPassword());
 		return u;
 	}

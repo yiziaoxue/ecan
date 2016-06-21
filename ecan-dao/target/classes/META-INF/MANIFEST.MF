@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-Title: ecan-dao
+Implementation-Version: V1.0
+Implementation-Vendor-Id: com.ecan
+Build-Jdk: 1.7.0_79
+Built-By: TaneRoom
+Created-By: Maven Integration for Eclipse
+

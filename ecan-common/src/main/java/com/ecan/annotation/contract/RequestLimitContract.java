@@ -4,13 +4,13 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
-//import org.aspectj.lang.JoinPoint;
-//import org.aspectj.lang.annotation.Aspect;
-//import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import com.ecan.annotation.RequestLimit;
@@ -24,10 +24,10 @@ import com.ecan.util.HttpRequestUtil;
 * 类说明
 */
 
-//@Aspect
+@Aspect
 @Component
 public class RequestLimitContract {
-/*	private static final Logger logger = LoggerFactory.getLogger("RequestLimitLogger");
+	private static final Logger logger = LoggerFactory.getLogger("RequestLimitLogger");
 	  @Autowired
 	  private RedisTemplate<String, String> redisTemplate;
 
@@ -64,5 +64,5 @@ public class RequestLimitContract {
 	    } catch (Exception e) {
 	      logger.error("发生异常: ", e);
 	    }
-	  }*/
+	  }
 }

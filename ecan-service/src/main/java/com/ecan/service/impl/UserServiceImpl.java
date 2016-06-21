@@ -1,7 +1,12 @@
 package com.ecan.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecan.mapper.UserMapper;
+import com.ecan.model.User;
 import com.ecan.service.UserService;
 
 /**
@@ -13,7 +18,15 @@ import com.ecan.service.UserService;
 @Service
 public class UserServiceImpl implements UserService{
 	
+	@Autowired
+	private UserMapper userMapper;
+	
 	public void sys(){
 		System.out.println("hello world");
+	}
+
+	@Override
+	public List<User> getUserInfo() {
+		return userMapper.findUserInfo();
 	}
 }
