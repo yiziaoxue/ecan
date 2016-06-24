@@ -11,9 +11,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
- 
+
 import javax.sql.DataSource;
  
+/** 
+ * 数据连接配置
+ * @author TaneRoom
+ * @date 2016年6月21日 下午3:02:20 
+ * @version v1.0 
+ */
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan
@@ -43,5 +49,5 @@ public class DatabaseConfiguration {
     public PlatformTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
- 
+    
 }

@@ -12,13 +12,13 @@ import com.ecan.model.User;
 import com.ecan.service.UserService;
 
 /**
- * @Description 测试一下
+ * 测试一下，测试控制器
  * @author TaneRoom
  * @date 2016年6月21日 下午2:44:25 
  * @version v1.0
  */
 @Controller
-public class UserController {
+public class UserController extends AbstractController {
 
 	private Logger logger = Logger.getLogger(UserController.class);
 	 

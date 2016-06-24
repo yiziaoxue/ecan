@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:com.ecan.EcanWebApplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

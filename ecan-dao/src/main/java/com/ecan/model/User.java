@@ -1,6 +1,6 @@
 package com.ecan.model;
 /** 
- * @Description :测试一下
+ * 测试一下，数据库对应的模型
  * @author :TaneRoom
  * @date 创建时间：2016年6月21日 下午2:22:31 
  * @version 1.0 
