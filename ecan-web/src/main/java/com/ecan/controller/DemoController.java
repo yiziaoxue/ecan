@@ -1,17 +1,13 @@
 package com.ecan.controller;
 
-import java.net.UnknownHostException;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ecan.annotation.RequestLimit;
-import com.ecan.service.UserService;
 
 
 /**
@@ -23,13 +19,11 @@ import com.ecan.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class DemoController {
-	@Autowired
-	private UserService userService;
+	
 	
     @RequestLimit(count=3,time=60000)
     @RequestMapping("/view/{name}")
-	public String home(ModelMap map,HttpServletRequest request,@PathVariable("name") String name) throws UnknownHostException {
-    	userService.sys();
+	public String home(ModelMap map,HttpServletRequest request,@PathVariable("name") String name) {
     	map.addAttribute("host", name);
     	return "login";
 	 }
