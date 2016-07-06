@@ -1,6 +1,10 @@
 package com.ecan.model;
 
-
+/**
+ * model文件，系统自动生成
+ * @author: TaneRoom
+ * @date: 2016-07-07 00:08:49
+ */
 public class YqUsers{
 	private Integer usid;	//用户ID
 	private String email;	//注册邮箱

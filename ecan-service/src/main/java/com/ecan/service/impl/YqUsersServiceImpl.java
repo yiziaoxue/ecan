@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+/**
+ * mapper文件，系统自动生成
+ * @author: TaneRoom
+ * @date: 2016-07-07 00:08:50
+ */
 @Service("yqUsersService")
 public class YqUsersServiceImpl implements YqUsersService {
 
