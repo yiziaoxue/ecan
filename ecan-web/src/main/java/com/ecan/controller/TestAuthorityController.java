@@ -7,9 +7,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ecan.annotation.Authority;
 import com.ecan.annotation.contract.AuthorityContract;
 import com.ecan.service.TestService;
+
+import cn.ecan.constant.Perm;
+import cn.ecan.constant.Role;
 
 @Controller
 public class TestAuthorityController {
@@ -19,7 +24,9 @@ public class TestAuthorityController {
 	
 	Logger logger = Logger.getLogger(this.getClass());
 	
+	@Authority(role = {Role.ADMIN},perm = { Perm.CREATE })
 	@RequestMapping("test")
+	@ResponseBody
 	public void test(){
 		 Set<String> roles = new HashSet<String>();
 		    roles.add("ROLE_ADMIN");
