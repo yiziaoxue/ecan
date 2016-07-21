@@ -1,12 +1,51 @@
-<!DOCTYPE html>  
-<html>  
-<head lang="en">  
-    <meta charset="UTF-8" />
-    <title>Spring Boot</title>
-</head>  
-<body>  
-<!-- 测试提交2 -->>
-<h1 th:text="${host}">Hello World</h1>  
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+       class="ui-page-login">
 
-</body>  
-</html>  
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="/jquery/jquery-3.0.0.min.js"></script>
+		<link href="/mui/css/mui.min.css" rel="stylesheet" />
+		<link href="/ecan/css/login.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">登录</h1>
+		</header>
+		<div class="mui-content">
+			<form id='login-form' class="mui-input-group" method='post' action='localhost:8080/user/view/5657'>
+				<div class="mui-input-row">
+					<label>账号</label>
+					<input id='username' name='username' type="text" class="mui-input-clear mui-input" placeholder="请输入账号"/>
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input id='password' name='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码"/>
+				</div>
+			</form>
+			<form class="mui-input-group">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						自动登录
+						<div id="autoLogin" class="mui-switch">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+				</ul>
+			</form>
+			<div class="mui-content-padded">
+				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+				</div>
+			</div>
+			<div class="mui-content-padded oauth-area">
+
+			</div>
+		</div>
+		<script src="/ecan/js/login.js"></script>
+	</body>
+</html>
