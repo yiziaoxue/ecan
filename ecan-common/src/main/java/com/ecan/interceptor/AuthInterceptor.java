@@ -10,6 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.ecan.annotation.Authority;
 import com.ecan.annotation.contract.AuthorityContract;
+import com.ecan.exception.AuthorityException;
 
 /** 
  * TODO
@@ -24,7 +25,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         
-    	//处理Permission Annotation，实现方法级权限控制  
+    	//处理Authority Annotation，实现方法级权限控制  
         HandlerMethod method = (HandlerMethod)handler;  
         Authority auth = method.getMethodAnnotation(Authority.class);  
           
@@ -42,7 +43,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         try {
 			AuthorityContract.checkPermission(auth);
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(e instanceof AuthorityException){
+				logger.error("Method Authority: " + e.getMessage());
+			}else{
+				e.printStackTrace();
+			}
 			return false;
 		}
         
