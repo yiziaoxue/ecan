@@ -1,0 +1,16 @@
+项目文档
+
+一、权限验证规则：
+设置了四个annotation变量：
+/**资源的组权限*/
+public String[] role() default "";
+/**组权限是不是或关系，即只要满足其中之一即可，默认为是*/
+public boolean roleOr() default true;
+/**单个权限组*/
+public String[] perm() default "";
+/**单个权限是不是或关系，默认为否，即全部的单个权限必须全部满足才行*/
+public boolean permOr() default false;
+这其中role代表角色，说明是是什么角色才能访问这个方法，roleOr代表是否验证角色，如果不需要验证，则给roleOr赋false
+另外perm代表操作动作，说明这个觉得只具有什么动作权限，比如增删改查，同理，permOr也是代表是都验证动作，不需要验证则赋false
+
+这个是在方法级别的，实际用户获取权限，则需要根据用户的数据库配置，拿到自己的角色和所匹配的动作，然后与方法对比，如果用户拥有的权限大于或者等于方法权限，则允许该用户访问该方法。

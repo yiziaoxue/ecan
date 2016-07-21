@@ -7,6 +7,12 @@ import java.util.Set;
 import com.ecan.annotation.Authority;
 import com.ecan.exception.AuthorityException;
 
+/**
+ * 权限验证算法
+ * @author TaneRoom
+ * @since 2016年7月21日 上午10:46:34 
+ * @version v1.0
+ */
 public class AuthorityContract {
 
 	private static final ThreadLocal<Set<String>> roles = new ThreadLocal<Set<String>>();
@@ -58,6 +64,11 @@ public class AuthorityContract {
         }
         
         Set<String> rs = getRoles();
+        //如果角色集为空，则不允许获取权限
+        if(rs == null){
+        	return false;
+        }
+        
         if (auth.roleOr()) {
             for (String role : roles) {
                 if (rs.contains(role)) {

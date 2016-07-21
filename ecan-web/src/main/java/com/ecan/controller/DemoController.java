@@ -7,7 +7,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ecan.annotation.Authority;
 import com.ecan.annotation.RequestLimit;
+
+import cn.ecan.constant.Perm;
+import cn.ecan.constant.Role;
 
 
 /**
@@ -19,7 +23,6 @@ import com.ecan.annotation.RequestLimit;
 @Controller
 @RequestMapping("/user")
 public class DemoController {
-	
 	
     @RequestLimit(count=3,time=60000)
     @RequestMapping("/view/{name}")
