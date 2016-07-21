@@ -1,6 +1,5 @@
 package com.ecan.model;
-import java.util.Date;
-import java.util.Date;
+
 import java.util.Date;
 
 /**

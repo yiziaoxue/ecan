@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecan.mapper.VmanPermcolumnMapper">
+
+	<insert id="addEntity">
+		insert into vman_permcolumn(permcolumnname) values(#{permcolumnname})
+	</insert>
+
+	<delete id="deleteEntity">
+		delete from vman_permcolumn	</delete>
+
+	<update id="updateEntity">
+		update vman_permcolumn
+		<set>
+			<if test="permcolumnname != null">
+				permcolumnname = #{permcolumnname},
+			</if>
+		</set>
+	</update>
+
+	<select id="findEntity" resultType="com.ecan.model.VmanPermcolumn">
+		select
+		permcolumnname AS permcolumnname
+		from vman_permcolumn
+		where 1 = 1
+		<if test="permcolumnname != null">
+			and permcolumnname = #{permcolumnname}
+		</if>
+	</select>
+
+	<select id="findEntityList" resultType="com.ecan.model.VmanPermcolumn">
+		select
+		permcolumnname AS permcolumnname
+		from vman_permcolumn
+		where 1 = 1
+		<if test="permcolumnname != null">
+			and permcolumnname = #{permcolumnname}
+		</if>
+	</select>
+
+
+</mapper>

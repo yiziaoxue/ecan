@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecan.mapper.VmanPermMapper">
+
+	<insert id="addEntity">
+		insert into vman_perm(permname,perm,permcolumnid,viewmode) values(#{permname},#{perm},#{permcolumnid},#{viewmode})
+	</insert>
+
+	<delete id="deleteEntity">
+		delete from vman_perm where permcolumnid = #{permcolumnid}
+	</delete>
+
+	<update id="updateEntity">
+		update vman_perm
+		<set>
+			<if test="permname != null">
+				permname = #{permname},
+			</if>
+			<if test="perm != null">
+				perm = #{perm},
+			</if>
+			<if test="permcolumnid != null">
+				permcolumnid = #{permcolumnid},
+			</if>
+			<if test="viewmode != null">
+				viewmode = #{viewmode},
+			</if>
+		</set>
+		where permcolumnid = #{permcolumnid}
+	</update>
+
+	<select id="findEntity" resultType="com.ecan.model.VmanPerm">
+		select
+		permname AS permname,
+		perm AS perm,
+		permcolumnid AS permcolumnid,
+		viewmode AS viewmode
+		from vman_perm
+		where 1 = 1
+		<if test="permname != null">
+			and permname = #{permname}
+		</if>
+		<if test="perm != null">
+			and perm = #{perm}
+		</if>
+		<if test="permcolumnid != null">
+			and permcolumnid = #{permcolumnid}
+		</if>
+		<if test="viewmode != null">
+			and viewmode = #{viewmode}
+		</if>
+	</select>
+
+	<select id="findEntityList" resultType="com.ecan.model.VmanPerm">
+		select
+		permname AS permname,
+		perm AS perm,
+		permcolumnid AS permcolumnid,
+		viewmode AS viewmode
+		from vman_perm
+		where 1 = 1
+		<if test="permname != null">
+			and permname = #{permname}
+		</if>
+		<if test="perm != null">
+			and perm = #{perm}
+		</if>
+		<if test="permcolumnid != null">
+			and permcolumnid = #{permcolumnid}
+		</if>
+		<if test="viewmode != null">
+			and viewmode = #{viewmode}
+		</if>
+	</select>
+
+
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecan.mapper.VmanUserRoleRelaMapper">
+
+	<insert id="addEntity">
+		insert into vman_user_role_rela(userid,username,roleid,createrid,creatername,createdate) values(#{userid},#{username},#{roleid},#{createrid},#{creatername},#{createdate})
+	</insert>
+
+	<delete id="deleteEntity">
+		delete from vman_user_role_rela where createrid = #{createrid}
+	</delete>
+
+	<update id="updateEntity">
+		update vman_user_role_rela
+		<set>
+			<if test="userid != null">
+				userid = #{userid},
+			</if>
+			<if test="username != null">
+				username = #{username},
+			</if>
+			<if test="roleid != null">
+				roleid = #{roleid},
+			</if>
+			<if test="createrid != null">
+				createrid = #{createrid},
+			</if>
+			<if test="creatername != null">
+				creatername = #{creatername},
+			</if>
+			<if test="createdate != null">
+				createdate = #{createdate},
+			</if>
+		</set>
+		where createrid = #{createrid}
+	</update>
+
+	<select id="findEntity" resultType="com.ecan.model.VmanUserRoleRela">
+		select
+		userid AS userid,
+		username AS username,
+		roleid AS roleid,
+		createrid AS createrid,
+		creatername AS creatername,
+		createdate AS createdate
+		from vman_user_role_rela
+		where 1 = 1
+		<if test="userid != null">
+			and userid = #{userid}
+		</if>
+		<if test="username != null">
+			and username = #{username}
+		</if>
+		<if test="roleid != null">
+			and roleid = #{roleid}
+		</if>
+		<if test="createrid != null">
+			and createrid = #{createrid}
+		</if>
+		<if test="creatername != null">
+			and creatername = #{creatername}
+		</if>
+		<if test="createdate != null">
+			and createdate = #{createdate}
+		</if>
+	</select>
+
+	<select id="findEntityList" resultType="com.ecan.model.VmanUserRoleRela">
+		select
+		userid AS userid,
+		username AS username,
+		roleid AS roleid,
+		createrid AS createrid,
+		creatername AS creatername,
+		createdate AS createdate
+		from vman_user_role_rela
+		where 1 = 1
+		<if test="userid != null">
+			and userid = #{userid}
+		</if>
+		<if test="username != null">
+			and username = #{username}
+		</if>
+		<if test="roleid != null">
+			and roleid = #{roleid}
+		</if>
+		<if test="createrid != null">
+			and createrid = #{createrid}
+		</if>
+		<if test="creatername != null">
+			and creatername = #{creatername}
+		</if>
+		<if test="createdate != null">
+			and createdate = #{createdate}
+		</if>
+	</select>
+
+
+</mapper>
