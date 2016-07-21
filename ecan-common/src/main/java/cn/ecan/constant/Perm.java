@@ -1,4 +1,5 @@
 package cn.ecan.constant;
+
 /** 
  * 权限对应的操作
  * @author TaneRoom
