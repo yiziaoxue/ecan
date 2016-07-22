@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecan.mapper.VmanRoleMapper">
+
+	<insert id="addEntity">
+		insert into vman_role(rolename,role,createrid,creatername,createdate) values(#{rolename},#{role},#{createrid},#{creatername},#{createdate})
+	</insert>
+
+	<delete id="deleteEntity">
+		delete from vman_role where createrid = #{createrid}
+	</delete>
+
+	<update id="updateEntity">
+		update vman_role
+		<set>
+			<if test="rolename != null">
+				rolename = #{rolename},
+			</if>
+			<if test="role != null">
+				role = #{role},
+			</if>
+			<if test="createrid != null">
+				createrid = #{createrid},
+			</if>
+			<if test="creatername != null">
+				creatername = #{creatername},
+			</if>
+			<if test="createdate != null">
+				createdate = #{createdate},
+			</if>
+		</set>
+		where createrid = #{createrid}
+	</update>
+
+	<select id="findEntity" resultType="com.ecan.model.VmanRole">
+		select
+		rolename AS rolename,
+		role AS role,
+		createrid AS createrid,
+		creatername AS creatername,
+		createdate AS createdate
+		from vman_role
+		where 1 = 1
+		<if test="rolename != null">
+			and rolename = #{rolename}
+		</if>
+		<if test="role != null">
+			and role = #{role}
+		</if>
+		<if test="createrid != null">
+			and createrid = #{createrid}
+		</if>
+		<if test="creatername != null">
+			and creatername = #{creatername}
+		</if>
+		<if test="createdate != null">
+			and createdate = #{createdate}
+		</if>
+	</select>
+
+	<select id="findEntityList" resultType="com.ecan.model.VmanRole">
+		select
+		rolename AS rolename,
+		role AS role,
+		createrid AS createrid,
+		creatername AS creatername,
+		createdate AS createdate
+		from vman_role
+		where 1 = 1
+		<if test="rolename != null">
+			and rolename = #{rolename}
+		</if>
+		<if test="role != null">
+			and role = #{role}
+		</if>
+		<if test="createrid != null">
+			and createrid = #{createrid}
+		</if>
+		<if test="creatername != null">
+			and creatername = #{creatername}
+		</if>
+		<if test="createdate != null">
+			and createdate = #{createdate}
+		</if>
+	</select>
+
+
+</mapper>
