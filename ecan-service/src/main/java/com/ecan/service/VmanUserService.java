@@ -8,6 +8,7 @@ import java.util.List;
  * @author: TaneRoom
  * @date: 2016-07-21 18:06:54
  */
+
 public interface VmanUserService {
 
 	//增加实体

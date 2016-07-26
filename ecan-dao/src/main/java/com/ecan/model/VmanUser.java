@@ -2,29 +2,51 @@ package com.ecan.model;
 
 import java.util.Date;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
  * @date: 2016-07-21 18:06:52
  */
+@ApiModel
 public class VmanUser{
-	private Integer id;	//主键
-	private String userPhone;	//用户手机
-	private String userEmail;	//用户邮箱
-	private String userPsd;	//用户密码
-	private String userName;	//名字
-	private String userSex;	//性别
-	private Integer userAge;	//年龄
-	private Date userBirth;	//生日
-	private String userAddress;	//住址
-	private String userHobby;	//爱好
-	private String memberCode;	//会员编码
-	private Integer memberType;	//会员类型
-	private String cardCode;	//证件号码
-	private Integer cardType;	//证件类型
-	private Date createTime;	//创建时间
-	private Date lastTime;	//最后登录时间
-	private String remarks;	//备注
+	
+	@ApiModelProperty(value = "id", required = false)
+	private Integer id;	
+	@ApiModelProperty(value = "用户手机", required = false)	
+	private String userPhone;
+	@ApiModelProperty(value = "用户邮箱", required = false)
+	private String userEmail;
+	@ApiModelProperty(value = "用户密码", required = false)
+	private String userPsd;	
+	@ApiModelProperty(value = "名字", required = false)
+	private String userName;
+	@ApiModelProperty(value = "性别", required = false)
+	private String userSex;	
+	@ApiModelProperty(value = "年龄", required = false)
+	private Integer userAge;
+	@ApiModelProperty(value = "生日", required = false)
+	private Date userBirth;
+	@ApiModelProperty(value = "住址", required = false)
+	private String userAddress;	
+	@ApiModelProperty(value = "爱好", required = false)
+	private String userHobby;
+	@ApiModelProperty(value = "会员编码", required = false)
+	private String memberCode;
+	@ApiModelProperty(value = "会员类型", required = false)
+	private Integer memberType;	
+	@ApiModelProperty(value = "证件号码", required = false)
+	private String cardCode;
+	@ApiModelProperty(value = "证件类型", required = false)
+	private Integer cardType;
+	@ApiModelProperty(value = "创建时间", required = false)
+	private Date createTime;
+	@ApiModelProperty(value = "最后登录时间", required = false)
+	private Date lastTime;
+	@ApiModelProperty(value = "备注", required = false)
+	private String remarks;	
 
 
 	public Integer getId() {
