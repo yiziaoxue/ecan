@@ -2,9 +2,6 @@ package com.ecan.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,7 +11,6 @@ import io.swagger.annotations.ApiModelProperty;
  * @date: 2016-07-21 18:06:52
  */
 @ApiModel
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class VmanUser implements Serializable{
 	
 	

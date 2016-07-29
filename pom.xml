@@ -90,7 +90,7 @@
 		</dependency>
 		
 		<!-- Swagger -->
-        <dependency>
+<!--         <dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.5.0</version>
@@ -99,7 +99,7 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.5.0</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-staticdocs</artifactId>
@@ -116,6 +116,18 @@
           <groupId>org.springframework.boot</groupId>  
           <artifactId>spring-boot-starter-redis</artifactId>  
         </dependency> 
+        
+        <dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
 	</dependencies>
 
 </project>

@@ -49,7 +49,7 @@ public class EntrySystemController {
 	@RequestLimit(count=3,time=60000)
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ApiOperation(value="登录接口", notes="vmanUser")
-	@ApiImplicitParam(name = "vmanUser", value = "用户详细实体user", required=true, dataType="VmanUser")
+	@ApiImplicitParam(name = "vmanUser", value = "用户详细实体user", required=true, paramType="body", dataType="VmanUser")
 	@Cacheable(value="vmanUser")
 	public String login(@RequestBody VmanUser vmanUser,HttpServletRequest request) {
 		System.out.println(vmanUser.getUserPhone()+"登录成功");
