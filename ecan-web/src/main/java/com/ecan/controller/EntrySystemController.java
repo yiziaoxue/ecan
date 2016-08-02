@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class EntrySystemController {
 
 	@Autowired
 	private VmanUserService vmanUserService;
+	
 	@Autowired
 	private RedisUtil redisUtil;
 	
@@ -53,16 +55,19 @@ public class EntrySystemController {
 	@Cacheable(value="vmanUser")
 	public String login(@RequestBody VmanUser vmanUser,HttpServletRequest request) {
 		System.out.println(vmanUser.getUserPhone()+"登录成功");
-		redisUtil.set("name", vmanUser.getUserPhone());
-		redisUtil.set("psd", vmanUser.getUserPsd());
 	    return redisUtil.get("name")+" login success";
 	 }
 	
 	@RequestLimit(count=3,time=60000)
 	@RequestMapping(value="/regist",method=RequestMethod.POST)
 	@ApiOperation(value="注册接口", notes="getCount更多说明")
-	public String regist(ModelMap map,HttpServletRequest request) {
-//	    map.addAttribute("host", name);
+	@ApiImplicitParam(name = "vmanUser", value = "用户详细实体user", required=true, paramType="body", dataType="VmanUser")
+	public String regist(@RequestBody VmanUser vmanUser,HttpServletRequest request) {
+		try {
+			vmanUserService.addEntity(vmanUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("注册成功");
 	    return "login";
 	}
