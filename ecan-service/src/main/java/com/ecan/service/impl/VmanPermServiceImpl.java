@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * mapper文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-22 00:56:22
+ * @since: 2016-07-30 20:39:09
  */
 @Service("vmanPermService")
 public class VmanPermServiceImpl implements VmanPermService {

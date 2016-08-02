@@ -4,10 +4,10 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-22 00:56:15
+ * @since: 2016-07-30 20:39:02
  */
 public class VmanRolePermRela{
-	private Integer id;	//权限角色动作关系ID
+	private Integer rprid;	//权限角色动作关系ID
 	private Integer permid;	//权限动作ID
 	private Integer roleid;	//权限角色ID
 	private Integer createrid;	//创建者ID
@@ -15,12 +15,12 @@ public class VmanRolePermRela{
 	private Date createdate;	//创建时间
 
 
-	public Integer getId() {
-		return id;
+	public Integer getRprid() {
+		return rprid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setRprid(Integer rprid) {
+		this.rprid = rprid;
 	}
 
 	public Integer getPermid() {

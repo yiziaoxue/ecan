@@ -1,14 +1,15 @@
 package com.ecan.model;
-
+import java.util.Date;
+import java.util.Date;
 import java.util.Date;
 
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @date: 2016-07-21 18:06:52
+ * @date: 2016-08-02 15:26:33
  */
 public class VmanUser{
-	private Integer id;	//主键
+	private Integer usid;	//主键
 	private String userPhone;	//用户手机
 	private String userEmail;	//用户邮箱
 	private String userPsd;	//用户密码
@@ -27,12 +28,12 @@ public class VmanUser{
 	private String remarks;	//备注
 
 
-	public Integer getId() {
-		return id;
+	public Integer getUsid() {
+		return usid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setUsid(Integer usid) {
+		this.usid = usid;
 	}
 
 	public String getUserPhone() {

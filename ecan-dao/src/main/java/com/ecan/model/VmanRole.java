@@ -4,10 +4,10 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-22 00:56:14
+ * @since: 2016-07-30 20:39:01
  */
 public class VmanRole{
-	private Integer id;	//权限角色ID
+	private Integer roid;	//权限角色ID
 	private String rolename;	//权限角色名
 	private String role;	//权限角色字符串
 	private Integer createrid;	//创建者ID
@@ -15,12 +15,12 @@ public class VmanRole{
 	private Date createdate;	//创建时间
 
 
-	public Integer getId() {
-		return id;
+	public Integer getRoid() {
+		return roid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setRoid(Integer roid) {
+		this.roid = roid;
 	}
 
 	public String getRolename() {

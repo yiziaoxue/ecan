@@ -3,22 +3,22 @@ package com.ecan.model;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-22 00:56:13
+ * @since: 2016-07-30 20:38:57
  */
 public class VmanPerm{
-	private Integer id;	//权限动作ID
+	private Integer peid;	//权限动作ID
 	private String permname;	//权限动作名称
 	private String perm;	//权限动作字符串
 	private Integer permcolumnid;	//动作分栏id(关联permcolumn表)
 	private Integer viewmode;	//是否可见
 
 
-	public Integer getId() {
-		return id;
+	public Integer getPeid() {
+		return peid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setPeid(Integer peid) {
+		this.peid = peid;
 	}
 
 	public String getPermname() {

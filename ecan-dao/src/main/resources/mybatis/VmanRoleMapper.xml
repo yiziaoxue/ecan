@@ -3,16 +3,19 @@
 <mapper namespace="com.ecan.mapper.VmanRoleMapper">
 
 	<insert id="addEntity">
-		insert into vman_role(rolename,role,createrid,creatername,createdate) values(#{rolename},#{role},#{createrid},#{creatername},#{createdate})
+		insert into vman_role(roid,rolename,role,createrid,creatername,createdate) values(#{roid},#{rolename},#{role},#{createrid},#{creatername},#{createdate})
 	</insert>
 
 	<delete id="deleteEntity">
-		delete from vman_role where createrid = #{createrid}
+		delete from vman_role where roid = #{roid}
 	</delete>
 
 	<update id="updateEntity">
 		update vman_role
 		<set>
+			<if test="roid != null">
+				roid = #{roid},
+			</if>
 			<if test="rolename != null">
 				rolename = #{rolename},
 			</if>
@@ -29,11 +32,12 @@
 				createdate = #{createdate},
 			</if>
 		</set>
-		where createrid = #{createrid}
+		where roid = #{roid}
 	</update>
 
 	<select id="findEntity" resultType="com.ecan.model.VmanRole">
 		select
+		roid AS roid,
 		rolename AS rolename,
 		role AS role,
 		createrid AS createrid,
@@ -41,6 +45,9 @@
 		createdate AS createdate
 		from vman_role
 		where 1 = 1
+		<if test="roid != null">
+			and roid = #{roid}
+		</if>
 		<if test="rolename != null">
 			and rolename = #{rolename}
 		</if>
@@ -60,6 +67,7 @@
 
 	<select id="findEntityList" resultType="com.ecan.model.VmanRole">
 		select
+		roid AS roid,
 		rolename AS rolename,
 		role AS role,
 		createrid AS createrid,
@@ -67,6 +75,9 @@
 		createdate AS createdate
 		from vman_role
 		where 1 = 1
+		<if test="roid != null">
+			and roid = #{roid}
+		</if>
 		<if test="rolename != null">
 			and rolename = #{rolename}
 		</if>

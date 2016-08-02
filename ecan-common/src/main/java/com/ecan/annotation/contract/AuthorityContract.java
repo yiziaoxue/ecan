@@ -15,6 +15,25 @@ import com.ecan.exception.AuthorityException;
  */
 public class AuthorityContract {
 
+//	private AuthorityContract(){}
+//	
+//	private static AuthorityContract instance;
+//	
+//	/**
+//	 * 设计成单例是因为，登录第一次之后，获取到的用户权限信息就是全局使用的
+//	 * @return 返回验证信息
+//	 */
+//	public static AuthorityContract getInstance(){
+//		if(instance == null){
+//			synchronized (instance) {
+//				if(instance == null){
+//					instance = new AuthorityContract();
+//				}
+//			}
+//		}
+//		return instance;
+//	}
+	
 	private static final ThreadLocal<Set<String>> roles = new ThreadLocal<Set<String>>();
     private static final ThreadLocal<Set<String>> perms = new ThreadLocal<Set<String>>();
     

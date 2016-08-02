@@ -3,16 +3,19 @@
 <mapper namespace="com.ecan.mapper.VmanPermMapper">
 
 	<insert id="addEntity">
-		insert into vman_perm(permname,perm,permcolumnid,viewmode) values(#{permname},#{perm},#{permcolumnid},#{viewmode})
+		insert into vman_perm(peid,permname,perm,permcolumnid,viewmode) values(#{peid},#{permname},#{perm},#{permcolumnid},#{viewmode})
 	</insert>
 
 	<delete id="deleteEntity">
-		delete from vman_perm where permcolumnid = #{permcolumnid}
+		delete from vman_perm where peid = #{peid}
 	</delete>
 
 	<update id="updateEntity">
 		update vman_perm
 		<set>
+			<if test="peid != null">
+				peid = #{peid},
+			</if>
 			<if test="permname != null">
 				permname = #{permname},
 			</if>
@@ -26,17 +29,21 @@
 				viewmode = #{viewmode},
 			</if>
 		</set>
-		where permcolumnid = #{permcolumnid}
+		where peid = #{peid}
 	</update>
 
 	<select id="findEntity" resultType="com.ecan.model.VmanPerm">
 		select
+		peid AS peid,
 		permname AS permname,
 		perm AS perm,
 		permcolumnid AS permcolumnid,
 		viewmode AS viewmode
 		from vman_perm
 		where 1 = 1
+		<if test="peid != null">
+			and peid = #{peid}
+		</if>
 		<if test="permname != null">
 			and permname = #{permname}
 		</if>
@@ -53,12 +60,16 @@
 
 	<select id="findEntityList" resultType="com.ecan.model.VmanPerm">
 		select
+		peid AS peid,
 		permname AS permname,
 		perm AS perm,
 		permcolumnid AS permcolumnid,
 		viewmode AS viewmode
 		from vman_perm
 		where 1 = 1
+		<if test="peid != null">
+			and peid = #{peid}
+		</if>
 		<if test="permname != null">
 			and permname = #{permname}
 		</if>

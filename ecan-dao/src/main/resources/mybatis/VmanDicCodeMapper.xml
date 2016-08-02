@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecan.mapper.VmanDicCodeMapper">
+
+	<insert id="addEntity">
+		insert into vman_dic_code(dcid,code,dicKey,dicValue,dicDesc,createTime,createOprt,updateTime,updateOprt) values(#{dcid},#{code},#{dicKey},#{dicValue},#{dicDesc},#{createTime},#{createOprt},#{updateTime},#{updateOprt})
+	</insert>
+
+	<delete id="deleteEntity">
+		delete from vman_dic_code where dcid = #{dcid}
+	</delete>
+
+	<update id="updateEntity">
+		update vman_dic_code
+		<set>
+			<if test="dcid != null">
+				dcid = #{dcid},
+			</if>
+			<if test="code != null">
+				code = #{code},
+			</if>
+			<if test="dic_key != null">
+				dic_key = #{dicKey},
+			</if>
+			<if test="dic_value != null">
+				dic_value = #{dicValue},
+			</if>
+			<if test="dic_desc != null">
+				dic_desc = #{dicDesc},
+			</if>
+			<if test="create_time != null">
+				create_time = #{createTime},
+			</if>
+			<if test="create_oprt != null">
+				create_oprt = #{createOprt},
+			</if>
+			<if test="update_time != null">
+				update_time = #{updateTime},
+			</if>
+			<if test="update_oprt != null">
+				update_oprt = #{updateOprt},
+			</if>
+		</set>
+		where dcid = #{dcid}
+	</update>
+
+	<select id="findEntity" resultType="com.ecan.model.VmanDicCode">
+		select
+		dcid AS dcid,
+		code AS code,
+		dic_key AS dicKey,
+		dic_value AS dicValue,
+		dic_desc AS dicDesc,
+		create_time AS createTime,
+		create_oprt AS createOprt,
+		update_time AS updateTime,
+		update_oprt AS updateOprt
+		from vman_dic_code
+		where 1 = 1
+		<if test="dcid != null">
+			and dcid = #{dcid}
+		</if>
+		<if test="code != null">
+			and code = #{code}
+		</if>
+		<if test="dic_key != null">
+			and dic_key = #{dicKey}
+		</if>
+		<if test="dic_value != null">
+			and dic_value = #{dicValue}
+		</if>
+		<if test="dic_desc != null">
+			and dic_desc = #{dicDesc}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{createTime}
+		</if>
+		<if test="create_oprt != null">
+			and create_oprt = #{createOprt}
+		</if>
+		<if test="update_time != null">
+			and update_time = #{updateTime}
+		</if>
+		<if test="update_oprt != null">
+			and update_oprt = #{updateOprt}
+		</if>
+	</select>
+
+	<select id="findEntityList" resultType="com.ecan.model.VmanDicCode">
+		select
+		dcid AS dcid,
+		code AS code,
+		dic_key AS dicKey,
+		dic_value AS dicValue,
+		dic_desc AS dicDesc,
+		create_time AS createTime,
+		create_oprt AS createOprt,
+		update_time AS updateTime,
+		update_oprt AS updateOprt
+		from vman_dic_code
+		where 1 = 1
+		<if test="dcid != null">
+			and dcid = #{dcid}
+		</if>
+		<if test="code != null">
+			and code = #{code}
+		</if>
+		<if test="dic_key != null">
+			and dic_key = #{dicKey}
+		</if>
+		<if test="dic_value != null">
+			and dic_value = #{dicValue}
+		</if>
+		<if test="dic_desc != null">
+			and dic_desc = #{dicDesc}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{createTime}
+		</if>
+		<if test="create_oprt != null">
+			and create_oprt = #{createOprt}
+		</if>
+		<if test="update_time != null">
+			and update_time = #{updateTime}
+		</if>
+		<if test="update_oprt != null">
+			and update_oprt = #{updateOprt}
+		</if>
+	</select>
+
+
+</mapper>

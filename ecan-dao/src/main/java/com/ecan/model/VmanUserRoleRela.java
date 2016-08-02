@@ -4,10 +4,10 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-22 00:56:19
+ * @since: 2016-07-30 20:39:05
  */
 public class VmanUserRoleRela{
-	private Integer id;	//权限用户角色关联ID
+	private Integer urrid;	//权限用户角色关联ID
 	private Integer userid;	//用户ID
 	private String username;	//用户名称
 	private Integer roleid;	//角色ID
@@ -16,12 +16,12 @@ public class VmanUserRoleRela{
 	private Date createdate;	//创建时间
 
 
-	public Integer getId() {
-		return id;
+	public Integer getUrrid() {
+		return urrid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setUrrid(Integer urrid) {
+		this.urrid = urrid;
 	}
 
 	public Integer getUserid() {

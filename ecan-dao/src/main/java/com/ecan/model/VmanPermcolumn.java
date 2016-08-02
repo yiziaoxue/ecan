@@ -3,19 +3,19 @@ package com.ecan.model;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-22 00:56:13
+ * @since: 2016-07-30 20:38:57
  */
 public class VmanPermcolumn{
-	private Integer id;	//权限分栏ID
+	private Integer pcid;	//权限分栏ID
 	private String permcolumnname;	//权限分栏名称
 
 
-	public Integer getId() {
-		return id;
+	public Integer getPcid() {
+		return pcid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setPcid(Integer pcid) {
+		this.pcid = pcid;
 	}
 
 	public String getPermcolumnname() {

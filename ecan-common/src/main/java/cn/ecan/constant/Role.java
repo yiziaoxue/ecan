@@ -8,7 +8,7 @@ package cn.ecan.constant;
  */
 public class Role {
 	/** 超级管理员 */
-	public static final String ADMIN = "admin";
+	public static final String ADMIN = "ADMIN";
 	/** 管理人员 */
-	public static final String MANAGER = "manager";
+	public static final String MANAGER = "MANAGER";
 }

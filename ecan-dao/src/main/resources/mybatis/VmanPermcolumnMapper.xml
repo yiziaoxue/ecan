@@ -3,26 +3,35 @@
 <mapper namespace="com.ecan.mapper.VmanPermcolumnMapper">
 
 	<insert id="addEntity">
-		insert into vman_permcolumn(permcolumnname) values(#{permcolumnname})
+		insert into vman_permcolumn(pcid,permcolumnname) values(#{pcid},#{permcolumnname})
 	</insert>
 
 	<delete id="deleteEntity">
-		delete from vman_permcolumn	</delete>
+		delete from vman_permcolumn where pcid = #{pcid}
+	</delete>
 
 	<update id="updateEntity">
 		update vman_permcolumn
 		<set>
+			<if test="pcid != null">
+				pcid = #{pcid},
+			</if>
 			<if test="permcolumnname != null">
 				permcolumnname = #{permcolumnname},
 			</if>
 		</set>
+		where pcid = #{pcid}
 	</update>
 
 	<select id="findEntity" resultType="com.ecan.model.VmanPermcolumn">
 		select
+		pcid AS pcid,
 		permcolumnname AS permcolumnname
 		from vman_permcolumn
 		where 1 = 1
+		<if test="pcid != null">
+			and pcid = #{pcid}
+		</if>
 		<if test="permcolumnname != null">
 			and permcolumnname = #{permcolumnname}
 		</if>
@@ -30,9 +39,13 @@
 
 	<select id="findEntityList" resultType="com.ecan.model.VmanPermcolumn">
 		select
+		pcid AS pcid,
 		permcolumnname AS permcolumnname
 		from vman_permcolumn
 		where 1 = 1
+		<if test="pcid != null">
+			and pcid = #{pcid}
+		</if>
 		<if test="permcolumnname != null">
 			and permcolumnname = #{permcolumnname}
 		</if>

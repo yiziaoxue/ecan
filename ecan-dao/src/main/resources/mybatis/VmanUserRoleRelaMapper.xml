@@ -3,16 +3,19 @@
 <mapper namespace="com.ecan.mapper.VmanUserRoleRelaMapper">
 
 	<insert id="addEntity">
-		insert into vman_user_role_rela(userid,username,roleid,createrid,creatername,createdate) values(#{userid},#{username},#{roleid},#{createrid},#{creatername},#{createdate})
+		insert into vman_user_role_rela(urrid,userid,username,roleid,createrid,creatername,createdate) values(#{urrid},#{userid},#{username},#{roleid},#{createrid},#{creatername},#{createdate})
 	</insert>
 
 	<delete id="deleteEntity">
-		delete from vman_user_role_rela where createrid = #{createrid}
+		delete from vman_user_role_rela where urrid = #{urrid}
 	</delete>
 
 	<update id="updateEntity">
 		update vman_user_role_rela
 		<set>
+			<if test="urrid != null">
+				urrid = #{urrid},
+			</if>
 			<if test="userid != null">
 				userid = #{userid},
 			</if>
@@ -32,11 +35,12 @@
 				createdate = #{createdate},
 			</if>
 		</set>
-		where createrid = #{createrid}
+		where urrid = #{urrid}
 	</update>
 
 	<select id="findEntity" resultType="com.ecan.model.VmanUserRoleRela">
 		select
+		urrid AS urrid,
 		userid AS userid,
 		username AS username,
 		roleid AS roleid,
@@ -45,6 +49,9 @@
 		createdate AS createdate
 		from vman_user_role_rela
 		where 1 = 1
+		<if test="urrid != null">
+			and urrid = #{urrid}
+		</if>
 		<if test="userid != null">
 			and userid = #{userid}
 		</if>
@@ -67,6 +74,7 @@
 
 	<select id="findEntityList" resultType="com.ecan.model.VmanUserRoleRela">
 		select
+		urrid AS urrid,
 		userid AS userid,
 		username AS username,
 		roleid AS roleid,
@@ -75,6 +83,9 @@
 		createdate AS createdate
 		from vman_user_role_rela
 		where 1 = 1
+		<if test="urrid != null">
+			and urrid = #{urrid}
+		</if>
 		<if test="userid != null">
 			and userid = #{userid}
 		</if>

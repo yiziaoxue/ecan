@@ -3,16 +3,19 @@
 <mapper namespace="com.ecan.mapper.VmanRolePermRelaMapper">
 
 	<insert id="addEntity">
-		insert into vman_role_perm_rela(permid,roleid,createrid,creatername,createdate) values(#{permid},#{roleid},#{createrid},#{creatername},#{createdate})
+		insert into vman_role_perm_rela(rprid,permid,roleid,createrid,creatername,createdate) values(#{rprid},#{permid},#{roleid},#{createrid},#{creatername},#{createdate})
 	</insert>
 
 	<delete id="deleteEntity">
-		delete from vman_role_perm_rela where createrid = #{createrid}
+		delete from vman_role_perm_rela where rprid = #{rprid}
 	</delete>
 
 	<update id="updateEntity">
 		update vman_role_perm_rela
 		<set>
+			<if test="rprid != null">
+				rprid = #{rprid},
+			</if>
 			<if test="permid != null">
 				permid = #{permid},
 			</if>
@@ -29,11 +32,12 @@
 				createdate = #{createdate},
 			</if>
 		</set>
-		where createrid = #{createrid}
+		where rprid = #{rprid}
 	</update>
 
 	<select id="findEntity" resultType="com.ecan.model.VmanRolePermRela">
 		select
+		rprid AS rprid,
 		permid AS permid,
 		roleid AS roleid,
 		createrid AS createrid,
@@ -41,6 +45,9 @@
 		createdate AS createdate
 		from vman_role_perm_rela
 		where 1 = 1
+		<if test="rprid != null">
+			and rprid = #{rprid}
+		</if>
 		<if test="permid != null">
 			and permid = #{permid}
 		</if>
@@ -60,6 +67,7 @@
 
 	<select id="findEntityList" resultType="com.ecan.model.VmanRolePermRela">
 		select
+		rprid AS rprid,
 		permid AS permid,
 		roleid AS roleid,
 		createrid AS createrid,
@@ -67,6 +75,9 @@
 		createdate AS createdate
 		from vman_role_perm_rela
 		where 1 = 1
+		<if test="rprid != null">
+			and rprid = #{rprid}
+		</if>
 		<if test="permid != null">
 			and permid = #{permid}
 		</if>
