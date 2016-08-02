@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * mapper文件，系统自动生成
  * @author: TaneRoom
- * @date: 2016-07-21 18:06:54
+ * @date: 2016-08-02 15:26:36
  */
 public interface VmanDicCodeService {
 

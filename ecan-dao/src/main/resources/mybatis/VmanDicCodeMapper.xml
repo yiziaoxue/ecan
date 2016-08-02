@@ -3,15 +3,19 @@
 <mapper namespace="com.ecan.mapper.VmanDicCodeMapper">
 
 	<insert id="addEntity">
-		insert into vman_dic_code(code,dicKey,dicValue,dicDesc,createTime,createOprt,updateTime,updateOprt) values(#{code},#{dicKey},#{dicValue},#{dicDesc},#{createTime},#{createOprt},#{updateTime},#{updateOprt})
+		insert into vman_dic_code(dcid,code,dicKey,dicValue,dicDesc,createTime,createOprt,updateTime,updateOprt) values(#{dcid},#{code},#{dicKey},#{dicValue},#{dicDesc},#{createTime},#{createOprt},#{updateTime},#{updateOprt})
 	</insert>
 
 	<delete id="deleteEntity">
-		delete from vman_dic_code	</delete>
+		delete from vman_dic_code where dcid = #{dcid}
+	</delete>
 
 	<update id="updateEntity">
 		update vman_dic_code
 		<set>
+			<if test="dcid != null">
+				dcid = #{dcid},
+			</if>
 			<if test="code != null">
 				code = #{code},
 			</if>
@@ -37,10 +41,12 @@
 				update_oprt = #{updateOprt},
 			</if>
 		</set>
+		where dcid = #{dcid}
 	</update>
 
 	<select id="findEntity" resultType="com.ecan.model.VmanDicCode">
 		select
+		dcid AS dcid,
 		code AS code,
 		dic_key AS dicKey,
 		dic_value AS dicValue,
@@ -51,6 +57,9 @@
 		update_oprt AS updateOprt
 		from vman_dic_code
 		where 1 = 1
+		<if test="dcid != null">
+			and dcid = #{dcid}
+		</if>
 		<if test="code != null">
 			and code = #{code}
 		</if>
@@ -79,6 +88,7 @@
 
 	<select id="findEntityList" resultType="com.ecan.model.VmanDicCode">
 		select
+		dcid AS dcid,
 		code AS code,
 		dic_key AS dicKey,
 		dic_value AS dicValue,
@@ -89,6 +99,9 @@
 		update_oprt AS updateOprt
 		from vman_dic_code
 		where 1 = 1
+		<if test="dcid != null">
+			and dcid = #{dcid}
+		</if>
 		<if test="code != null">
 			and code = #{code}
 		</if>

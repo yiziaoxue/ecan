@@ -3,15 +3,19 @@
 <mapper namespace="com.ecan.mapper.VmanUserMapper">
 
 	<insert id="addEntity">
-		insert into vman_user(userPhone,userEmail,userPsd,userName,userSex,userAge,userBirth,userAddress,userHobby,memberCode,memberType,cardCode,cardType,createTime,lastTime,remarks) values(#{userPhone},#{userEmail},#{userPsd},#{userName},#{userSex},#{userAge},#{userBirth},#{userAddress},#{userHobby},#{memberCode},#{memberType},#{cardCode},#{cardType},#{createTime},#{lastTime},#{remarks})
+		insert into vman_user(usid,userPhone,userEmail,userPsd,userName,userSex,userAge,userBirth,userAddress,userHobby,memberCode,memberType,cardCode,cardType,createTime,lastTime,remarks) values(#{usid},#{userPhone},#{userEmail},#{userPsd},#{userName},#{userSex},#{userAge},#{userBirth},#{userAddress},#{userHobby},#{memberCode},#{memberType},#{cardCode},#{cardType},#{createTime},#{lastTime},#{remarks})
 	</insert>
 
 	<delete id="deleteEntity">
-		delete from vman_user	</delete>
+		delete from vman_user where usid = #{usid}
+	</delete>
 
 	<update id="updateEntity">
 		update vman_user
 		<set>
+			<if test="usid != null">
+				usid = #{usid},
+			</if>
 			<if test="user_phone != null">
 				user_phone = #{userPhone},
 			</if>
@@ -61,10 +65,12 @@
 				remarks = #{remarks},
 			</if>
 		</set>
+		where usid = #{usid}
 	</update>
 
 	<select id="findEntity" resultType="com.ecan.model.VmanUser">
 		select
+		usid AS usid,
 		user_phone AS userPhone,
 		user_email AS userEmail,
 		user_psd AS userPsd,
@@ -83,6 +89,9 @@
 		remarks AS remarks
 		from vman_user
 		where 1 = 1
+		<if test="usid != null">
+			and usid = #{usid}
+		</if>
 		<if test="user_phone != null">
 			and user_phone = #{userPhone}
 		</if>
@@ -135,6 +144,7 @@
 
 	<select id="findEntityList" resultType="com.ecan.model.VmanUser">
 		select
+		usid AS usid,
 		user_phone AS userPhone,
 		user_email AS userEmail,
 		user_psd AS userPsd,
@@ -153,6 +163,9 @@
 		remarks AS remarks
 		from vman_user
 		where 1 = 1
+		<if test="usid != null">
+			and usid = #{usid}
+		</if>
 		<if test="user_phone != null">
 			and user_phone = #{userPhone}
 		</if>

@@ -1,14 +1,14 @@
 package com.ecan.model;
-
+import java.util.Date;
 import java.util.Date;
 
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @date: 2016-07-21 18:06:50
+ * @date: 2016-08-02 15:26:29
  */
 public class VmanDicCode{
-	private Integer id;	//主键
+	private Integer dcid;	//主键
 	private String code;	//标识代码组
 	private String dicKey;	//键
 	private String dicValue;	//值
@@ -19,12 +19,12 @@ public class VmanDicCode{
 	private String updateOprt;	//修改人
 
 
-	public Integer getId() {
-		return id;
+	public Integer getDcid() {
+		return dcid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setDcid(Integer dcid) {
+		this.dcid = dcid;
 	}
 
 	public String getCode() {
