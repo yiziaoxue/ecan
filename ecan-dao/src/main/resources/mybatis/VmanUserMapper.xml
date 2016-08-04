@@ -3,7 +3,7 @@
 <mapper namespace="com.ecan.mapper.VmanUserMapper">
 
 	<insert id="addEntity">
-		insert into vman_user(usid,userPhone,userEmail,userPsd,userName,userSex,userAge,userBirth,userAddress,userHobby,memberCode,memberType,cardCode,cardType,createTime,lastTime,remarks) values(#{usid},#{userPhone},#{userEmail},#{userPsd},#{userName},#{userSex},#{userAge},#{userBirth},#{userAddress},#{userHobby},#{memberCode},#{memberType},#{cardCode},#{cardType},#{createTime},#{lastTime},#{remarks})
+		insert into vman_user(user_phone,user_email,user_psd,user_name,user_sex,user_age,user_birth,user_address,user_hobby,member_code,member_type,card_code,card_type,create_time,last_time,remarks) values(#{userPhone},#{userEmail},#{userPsd},#{userName},#{userSex},#{userAge},#{userBirth},#{userAddress},#{userHobby},#{memberCode},#{memberType},#{cardCode},#{cardType},#{createTime},#{lastTime},#{remarks})
 	</insert>
 
 	<delete id="deleteEntity">
@@ -16,49 +16,49 @@
 			<if test="usid != null">
 				usid = #{usid},
 			</if>
-			<if test="user_phone != null">
+			<if test="userPhone != null">
 				user_phone = #{userPhone},
 			</if>
-			<if test="user_email != null">
+			<if test="userEmail != null">
 				user_email = #{userEmail},
 			</if>
-			<if test="user_psd != null">
+			<if test="userPsd != null">
 				user_psd = #{userPsd},
 			</if>
-			<if test="user_name != null">
+			<if test="userName != null">
 				user_name = #{userName},
 			</if>
-			<if test="user_sex != null">
+			<if test="userSex != null">
 				user_sex = #{userSex},
 			</if>
-			<if test="user_age != null">
+			<if test="userAge != null">
 				user_age = #{userAge},
 			</if>
-			<if test="user_birth != null">
+			<if test="userBirth != null">
 				user_birth = #{userBirth},
 			</if>
-			<if test="user_address != null">
+			<if test="userAddress != null">
 				user_address = #{userAddress},
 			</if>
-			<if test="user_hobby != null">
+			<if test="userHobby != null">
 				user_hobby = #{userHobby},
 			</if>
-			<if test="member_code != null">
+			<if test="memberCode != null">
 				member_code = #{memberCode},
 			</if>
-			<if test="member_type != null">
+			<if test="memberType != null">
 				member_type = #{memberType},
 			</if>
-			<if test="card_code != null">
+			<if test="cardCode != null">
 				card_code = #{cardCode},
 			</if>
-			<if test="card_type != null">
+			<if test="cardType != null">
 				card_type = #{cardType},
 			</if>
-			<if test="create_time != null">
+			<if test="createTime != null">
 				create_time = #{createTime},
 			</if>
-			<if test="last_time != null">
+			<if test="lastTime != null">
 				last_time = #{lastTime},
 			</if>
 			<if test="remarks != null">
@@ -92,49 +92,49 @@
 		<if test="usid != null">
 			and usid = #{usid}
 		</if>
-		<if test="user_phone != null">
+		<if test="userPhone != null">
 			and user_phone = #{userPhone}
 		</if>
-		<if test="user_email != null">
+		<if test="userEmail != null">
 			and user_email = #{userEmail}
 		</if>
-		<if test="user_psd != null">
+		<if test="userPsd != null">
 			and user_psd = #{userPsd}
 		</if>
-		<if test="user_name != null">
+		<if test="userName != null">
 			and user_name = #{userName}
 		</if>
-		<if test="user_sex != null">
+		<if test="userSex != null">
 			and user_sex = #{userSex}
 		</if>
-		<if test="user_age != null">
+		<if test="userAge != null">
 			and user_age = #{userAge}
 		</if>
-		<if test="user_birth != null">
+		<if test="userBirth != null">
 			and user_birth = #{userBirth}
 		</if>
-		<if test="user_address != null">
+		<if test="userAddress != null">
 			and user_address = #{userAddress}
 		</if>
-		<if test="user_hobby != null">
+		<if test="userHobby != null">
 			and user_hobby = #{userHobby}
 		</if>
-		<if test="member_code != null">
+		<if test="memberCode != null">
 			and member_code = #{memberCode}
 		</if>
-		<if test="member_type != null">
+		<if test="memberType != null">
 			and member_type = #{memberType}
 		</if>
-		<if test="card_code != null">
+		<if test="cardCode != null">
 			and card_code = #{cardCode}
 		</if>
-		<if test="card_type != null">
+		<if test="cardType != null">
 			and card_type = #{cardType}
 		</if>
-		<if test="create_time != null">
+		<if test="createTime != null">
 			and create_time = #{createTime}
 		</if>
-		<if test="last_time != null">
+		<if test="lastTime != null">
 			and last_time = #{lastTime}
 		</if>
 		<if test="remarks != null">
@@ -166,49 +166,49 @@
 		<if test="usid != null">
 			and usid = #{usid}
 		</if>
-		<if test="user_phone != null">
+		<if test="userPhone != null">
 			and user_phone = #{userPhone}
 		</if>
-		<if test="user_email != null">
+		<if test="userEmail != null">
 			and user_email = #{userEmail}
 		</if>
-		<if test="user_psd != null">
+		<if test="userPsd != null">
 			and user_psd = #{userPsd}
 		</if>
-		<if test="user_name != null">
+		<if test="userName != null">
 			and user_name = #{userName}
 		</if>
-		<if test="user_sex != null">
+		<if test="userSex != null">
 			and user_sex = #{userSex}
 		</if>
-		<if test="user_age != null">
+		<if test="userAge != null">
 			and user_age = #{userAge}
 		</if>
-		<if test="user_birth != null">
+		<if test="userBirth != null">
 			and user_birth = #{userBirth}
 		</if>
-		<if test="user_address != null">
+		<if test="userAddress != null">
 			and user_address = #{userAddress}
 		</if>
-		<if test="user_hobby != null">
+		<if test="userHobby != null">
 			and user_hobby = #{userHobby}
 		</if>
-		<if test="member_code != null">
+		<if test="memberCode != null">
 			and member_code = #{memberCode}
 		</if>
-		<if test="member_type != null">
+		<if test="memberType != null">
 			and member_type = #{memberType}
 		</if>
-		<if test="card_code != null">
+		<if test="cardCode != null">
 			and card_code = #{cardCode}
 		</if>
-		<if test="card_type != null">
+		<if test="cardType != null">
 			and card_type = #{cardType}
 		</if>
-		<if test="create_time != null">
+		<if test="createTime != null">
 			and create_time = #{createTime}
 		</if>
-		<if test="last_time != null">
+		<if test="lastTime != null">
 			and last_time = #{lastTime}
 		</if>
 		<if test="remarks != null">

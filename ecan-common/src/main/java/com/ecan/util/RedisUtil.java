@@ -18,6 +18,7 @@ public class RedisUtil {
 	@SuppressWarnings("rawtypes")
 	@Autowired
 	private RedisTemplate redisTemplate;
+
 	/**
 	 * 批量删除对应的value
 	 * 
@@ -28,6 +29,7 @@ public class RedisUtil {
 			remove(key);
 		}
 	}
+
 	/**
 	 * 批量删除key
 	 * 
@@ -38,6 +40,7 @@ public class RedisUtil {
 		if (keys.size() > 0)
 			redisTemplate.delete(keys);
 	}
+
 	/**
 	 * 删除对应的value
 	 * 
@@ -48,6 +51,7 @@ public class RedisUtil {
 			redisTemplate.delete(key);
 		}
 	}
+
 	/**
 	 * 判断缓存中是否有对应的value
 	 * 
@@ -57,6 +61,7 @@ public class RedisUtil {
 	public boolean exists(final String key) {
 		return redisTemplate.hasKey(key);
 	}
+
 	/**
 	 * 读取缓存
 	 * 
@@ -69,6 +74,7 @@ public class RedisUtil {
 		result = operations.get(key);
 		return result;
 	}
+
 	/**
 	 * 写入缓存
 	 * 
@@ -87,6 +93,7 @@ public class RedisUtil {
 		}
 		return result;
 	}
+
 	/**
 	 * 写入缓存
 	 * 
@@ -104,6 +111,6 @@ public class RedisUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			return result;
-		}
+		return result;
 	}
+}

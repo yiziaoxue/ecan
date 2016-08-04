@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @date: 2016-08-02 15:26:29
+ * @date: 2016-08-03 12:55:30
  */
 public class VmanDicCode{
 	private Integer dcid;	//主键

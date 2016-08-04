@@ -105,17 +105,17 @@
 			<version>2.5.0</version>
 		</dependency>
 
-		<!-- aspectjrt依赖 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-		</dependency>
-		<!-- redis依赖 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
-		</dependency>
-		<!--spring session-->
+		<!--  aspectjrt依赖 -->
+ 		<dependency>
+ 			<groupId>org.springframework</groupId>
+ 			<artifactId>spring-aspects</artifactId>
+ 		</dependency>
+ 	   <!-- redis依赖 -->
+		<dependency>  
+          <groupId>org.springframework.boot</groupId>  
+          <artifactId>spring-boot-starter-redis</artifactId>  
+        </dependency> 
+        <!--spring session-->
 		<dependency>
 		    <groupId>org.springframework.session</groupId>
 		    <artifactId>spring-session</artifactId>
@@ -133,8 +133,8 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 		</dependency>
-
-		<dependency>
+		
+        <dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.2.2</version>
