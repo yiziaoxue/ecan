@@ -3,7 +3,7 @@
 <mapper namespace="com.ecan.mapper.VmanDicCodeMapper">
 
 	<insert id="addEntity">
-		insert into vman_dic_code(dcid,code,dicKey,dicValue,dicDesc,createTime,createOprt,updateTime,updateOprt) values(#{dcid},#{code},#{dicKey},#{dicValue},#{dicDesc},#{createTime},#{createOprt},#{updateTime},#{updateOprt})
+		insert into vman_dic_code(code,dic_key,dic_value,dic_desc,create_time,create_oprt,update_time,update_oprt) values(#{code},#{dicKey},#{dicValue},#{dicDesc},#{createTime},#{createOprt},#{updateTime},#{updateOprt})
 	</insert>
 
 	<delete id="deleteEntity">
@@ -19,25 +19,25 @@
 			<if test="code != null">
 				code = #{code},
 			</if>
-			<if test="dic_key != null">
+			<if test="dicKey != null">
 				dic_key = #{dicKey},
 			</if>
-			<if test="dic_value != null">
+			<if test="dicValue != null">
 				dic_value = #{dicValue},
 			</if>
-			<if test="dic_desc != null">
+			<if test="dicDesc != null">
 				dic_desc = #{dicDesc},
 			</if>
-			<if test="create_time != null">
+			<if test="createTime != null">
 				create_time = #{createTime},
 			</if>
-			<if test="create_oprt != null">
+			<if test="createOprt != null">
 				create_oprt = #{createOprt},
 			</if>
-			<if test="update_time != null">
+			<if test="updateTime != null">
 				update_time = #{updateTime},
 			</if>
-			<if test="update_oprt != null">
+			<if test="updateOprt != null">
 				update_oprt = #{updateOprt},
 			</if>
 		</set>
@@ -63,25 +63,25 @@
 		<if test="code != null">
 			and code = #{code}
 		</if>
-		<if test="dic_key != null">
+		<if test="dicKey != null">
 			and dic_key = #{dicKey}
 		</if>
-		<if test="dic_value != null">
+		<if test="dicValue != null">
 			and dic_value = #{dicValue}
 		</if>
-		<if test="dic_desc != null">
+		<if test="dicDesc != null">
 			and dic_desc = #{dicDesc}
 		</if>
-		<if test="create_time != null">
+		<if test="createTime != null">
 			and create_time = #{createTime}
 		</if>
-		<if test="create_oprt != null">
+		<if test="createOprt != null">
 			and create_oprt = #{createOprt}
 		</if>
-		<if test="update_time != null">
+		<if test="updateTime != null">
 			and update_time = #{updateTime}
 		</if>
-		<if test="update_oprt != null">
+		<if test="updateOprt != null">
 			and update_oprt = #{updateOprt}
 		</if>
 	</select>
@@ -105,25 +105,25 @@
 		<if test="code != null">
 			and code = #{code}
 		</if>
-		<if test="dic_key != null">
+		<if test="dicKey != null">
 			and dic_key = #{dicKey}
 		</if>
-		<if test="dic_value != null">
+		<if test="dicValue != null">
 			and dic_value = #{dicValue}
 		</if>
-		<if test="dic_desc != null">
+		<if test="dicDesc != null">
 			and dic_desc = #{dicDesc}
 		</if>
-		<if test="create_time != null">
+		<if test="createTime != null">
 			and create_time = #{createTime}
 		</if>
-		<if test="create_oprt != null">
+		<if test="createOprt != null">
 			and create_oprt = #{createOprt}
 		</if>
-		<if test="update_time != null">
+		<if test="updateTime != null">
 			and update_time = #{updateTime}
 		</if>
-		<if test="update_oprt != null">
+		<if test="updateOprt != null">
 			and update_oprt = #{updateOprt}
 		</if>
 	</select>

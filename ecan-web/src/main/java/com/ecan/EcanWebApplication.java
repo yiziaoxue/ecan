@@ -6,9 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -19,6 +20,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableRedisHttpSession
 @EnableSwagger2
 @Configuration
 public class EcanWebApplication  extends SpringBootServletInitializer implements EmbeddedServletContainerCustomizer{
@@ -48,10 +50,14 @@ public class EcanWebApplication  extends SpringBootServletInitializer implements
 	private ApiInfo apiInfo() {
 	    return new ApiInfoBuilder()
 	            .title("VMAN API")
-	            .description("更多咨询请查看GIT：http://git.oschina.net/ecan/ecan")
-	            .termsOfServiceUrl("http://blog.didispace.com/")
+	            .description("更多咨询请查看:GIT：http://git.oschina.net/ecan/ecan")
 	            .contact("vman")
 	            .version("1.0")
 	            .build();
 	    }
+	
+	@Bean
+	public RedisSerializer<Object> springSessionDefaultRedisSerializer() {		
+		return new org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer();
+	}
 }
