@@ -34,7 +34,6 @@ public class RequestLimitContract {
 	  @Before("within(@org.springframework.web.bind.annotation.RestController *) && @annotation(limit)")
 	  public void requestLimit(final JoinPoint joinPoint,RequestLimit limit) throws RequestLimitException {
 
-		  System.out.println("进入注解分析方法----------------------------------------------");
 	    try {
 	      Object[] args = joinPoint.getArgs();
 	      HttpServletRequest request = null;
