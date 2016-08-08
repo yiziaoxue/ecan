@@ -28,6 +28,9 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	@Autowired
 	private VmanUserService vmanUserService;
 	
+	/**
+	 * 现在先这么做，后期可考虑时候mongoDB
+	 */
 	@Override
 	public ResultVO<VmanUser> doLogin(String loginName,String loginPsd,HttpSession session) {
 		ResultVO<VmanUser> result = new ResultVO<VmanUser>();
@@ -38,9 +41,9 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			vmanUser.setUserPhone(loginName);
 		vmanUser.setUserPsd(loginPsd);
 		
-		if(session.getAttribute(vmanUser.getUserPhone()) != null){
+		if(session.getAttribute(loginName) != null){
 			log.info("缓存中查询");
-			if(session.getAttribute(vmanUser.getUserPhone()).equals(vmanUser.getUserPsd()))
+			if(session.getAttribute(loginName).equals(loginPsd))
 				result.setResult("0",vmanUser);
 			else
 				result.setResult("-1","登录失败，账号密码不匹配");
