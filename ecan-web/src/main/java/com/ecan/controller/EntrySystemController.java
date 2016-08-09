@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecan.annotation.RequestLimit;
 import com.ecan.model.VmanUser;
+import com.ecan.modle.ResultVO;
 import com.ecan.service.VmanUserService;
+import com.ecan.service.business.EntrySystemService;
 import com.ecan.util.RedisUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -31,13 +34,11 @@ import io.swagger.annotations.ApiOperation;
 @Api(description="系统入口API")
 public class EntrySystemController {
 	private Logger log = Logger.getLogger(EntrySystemController.class);
-	@Autowired
-	private VmanUserService vmanUserService;
 	
 	@Autowired
-	private RedisUtil redisUtil;
+	private EntrySystemService entrySystemService;
 	
-	@RequestLimit(count=3,time=60000)
+	@RequestLimit(count=30,time=60000)
 	@RequestMapping(value="entry",method=RequestMethod.GET)
 	@ApiOperation(value="系统入口", notes="getCount更多说明")
 	public String entry(HttpServletRequest request) {
@@ -45,40 +46,24 @@ public class EntrySystemController {
 	    return "login";
 	 }
 	
-	@RequestLimit(count=3,time=60000)
+	@RequestLimit(count=30,time=60000)
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ApiOperation(value="登录接口", notes="vmanUser")
-	@ApiImplicitParam(name = "vmanUser", value = "用户详细实体user", required=true, paramType="body", dataType="VmanUser")
-	public VmanUser login(@RequestBody VmanUser vmanUser,HttpServletRequest request) throws Exception {
-		String backstr = "";
-		if(request.getSession().getAttribute(vmanUser.getUserPhone()) != null){
-			if(request.getSession().getAttribute(vmanUser.getUserPhone()).equals(vmanUser.getUserPsd()))
-				backstr = "登录成功";
-			else
-				backstr = "登录失败";
-		}else{
-			log.info("查询数据库");
-			List<VmanUser> vmanList = vmanUserService.findEntityList(vmanUser);
-			if(vmanList.size() == 0)
-				backstr = "登录失败";
-			else{
-				VmanUser user = vmanList.get(0);
-				backstr = "登录成功";
-				request.getSession().setAttribute(user.getUserPhone(), user.getUserPsd());
-			}
-		}
-		log.info(backstr);
-	    return vmanUser;
+	@ApiImplicitParams({
+	    @ApiImplicitParam(name = "loginName", value = "User's phone", required = true, dataType = "string", paramType = "query"),
+	    @ApiImplicitParam(name = "loginPsd", value = "User's password", required = true, dataType = "string", paramType = "query"),})
+	public ResultVO<VmanUser> login(String loginName,String loginPsd,HttpServletRequest request) throws Exception {
+	    return entrySystemService.doLogin(loginName,loginPsd,request.getSession());
 	 }
 	
-	@RequestLimit(count=3,time=60000)
+	@RequestLimit(count=30,time=60000)
 	@RequestMapping(value="/regist",method=RequestMethod.POST)
 	@ApiOperation(value="注册接口", notes="getCount更多说明")
-	@ApiImplicitParam(name = "vmanUser", value = "用户详细实体user", required=true, paramType="body", dataType="VmanUser")
-	public String regist(@RequestBody VmanUser vmanUser,HttpServletRequest request) throws Exception {
-		vmanUserService.addEntity(vmanUser);
-		System.out.println("注册成功");
-	    return "login";
+	@ApiImplicitParams({
+	    @ApiImplicitParam(name = "loginName", value = "User's loginName", required = true, dataType = "string", paramType = "query"),
+	    @ApiImplicitParam(name = "loginPsd", value = "User's loginPsd", required = true, dataType = "string", paramType = "query"),})
+	public ResultVO<VmanUser> regist(String loginName,String loginPsd,HttpServletRequest request) throws Exception {
+	    return entrySystemService.doRegist(loginName,loginPsd);
 	}
 	
 }

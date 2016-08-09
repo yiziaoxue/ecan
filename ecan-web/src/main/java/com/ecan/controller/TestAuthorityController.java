@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ecan.annotation.Authority;
 import com.ecan.annotation.contract.AuthorityContract;
+import com.ecan.constant.Perm;
+import com.ecan.constant.Role;
 import com.ecan.model.VmanPerm;
 import com.ecan.model.VmanRole;
 import com.ecan.model.VmanUser;
@@ -22,9 +24,6 @@ import com.ecan.service.TestService;
 import com.ecan.service.business.BVmanUserService;
 import com.ecan.util.JsonUtil;
 import com.ecan.util.StringUtil;
-
-import cn.ecan.constant.Perm;
-import cn.ecan.constant.Role;
 
 @Controller
 public class TestAuthorityController {
@@ -69,8 +68,8 @@ public class TestAuthorityController {
 				if(!map.isEmpty()){
 					VmanRole vmanRole = (VmanRole) map.get("role");
 					VmanPerm vmanPerm = (VmanPerm) map.get("perm");
-					rs.add(StringUtil.defaultString(vmanRole.getRole(),""));
-					ps.add(StringUtil.defaultString(vmanPerm.getPerm(),""));
+					rs.add(StringUtil.isNullDefault(vmanRole.getRole(),""));
+					ps.add(StringUtil.isNullDefault(vmanPerm.getPerm(),""));
 				}
 			}
 			//将用户的权限设置到权限验证算法中

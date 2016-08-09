@@ -1,4 +1,4 @@
-package cn.ecan.constant;
+package com.ecan.constant;
 
 /**
  * 权限对应的角色
