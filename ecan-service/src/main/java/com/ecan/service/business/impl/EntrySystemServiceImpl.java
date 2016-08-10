@@ -1,6 +1,9 @@
 package com.ecan.service.business.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,10 +13,15 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecan.annotation.contract.AuthorityContract;
+import com.ecan.model.VmanPerm;
+import com.ecan.model.VmanRole;
 import com.ecan.model.VmanUser;
 import com.ecan.modle.ResultVO;
 import com.ecan.service.VmanUserService;
+import com.ecan.service.business.BVmanUserService;
 import com.ecan.service.business.EntrySystemService;
+import com.ecan.util.StringUtil;
 
 /**
 * @author zhenhua.chun 
@@ -27,6 +35,9 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	
 	@Autowired
 	private VmanUserService vmanUserService;
+	
+	@Autowired
+	private BVmanUserService bVmanUserService;
 	
 	/**
 	 * 现在先这么做，后期可考虑时候mongoDB
@@ -49,18 +60,45 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 				result.setResult("-1","登录失败，账号密码不匹配");
 		}else{
 			log.info("数据库查询");
-			List<VmanUser> vmanList = null;
+//			List<VmanUser> vmanList = null;
+//			try {
+//				vmanList = vmanUserService.findEntityList(vmanUser);
+//			} catch (Exception e) {
+//				log.error("数据库查询失败");
+//				e.printStackTrace();
+//			}
+//			if(vmanList.size() == 0)
+//				result.setResult("-1","登录失败，账号密码不匹配");
+//			else{
+//				session.setAttribute(loginName, loginPsd);
+//				result.setResult("0",vmanUser);
+//			}
+			VmanUser vu = null;
 			try {
-				vmanList = vmanUserService.findEntityList(vmanUser);
+				vu = vmanUserService.findEntity(vmanUser);
+				if(vu == null)
+					result.setResult("-1","登录失败，账号密码不匹配");
+				else{
+					//根据登录信息，查询用户的权限信息
+					List<Map<String,Object>> list = bVmanUserService.getAuth(vu);
+					Set<String> rs = new HashSet<String>();
+					Set<String> ps = new HashSet<String>();
+					for(Map<String,Object> map : list){
+						if(!map.isEmpty()){
+							VmanRole vmanRole = (VmanRole) map.get("role");
+							VmanPerm vmanPerm = (VmanPerm) map.get("perm");
+							rs.add(StringUtil.isNullDefault(vmanRole.getRole(),""));
+							ps.add(StringUtil.isNullDefault(vmanPerm.getPerm(),""));
+						}
+					}
+					//将用户的权限设置到权限验证算法中
+					AuthorityContract.set(rs, ps);
+					session.setAttribute(loginName, loginPsd);
+					result.setResult("0",vmanUser);
+				}
 			} catch (Exception e) {
 				log.error("数据库查询失败");
 				e.printStackTrace();
-			}
-			if(vmanList.size() == 0)
-				result.setResult("-1","登录失败，账号密码不匹配");
-			else{
-				session.setAttribute(loginName, loginPsd);
-				result.setResult("0",vmanUser);
 			}
 		}
 

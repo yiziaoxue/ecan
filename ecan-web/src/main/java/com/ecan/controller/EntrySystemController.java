@@ -53,7 +53,7 @@ public class EntrySystemController {
 	    @ApiImplicitParam(name = "loginName", value = "User's phone", required = true, dataType = "string", paramType = "query"),
 	    @ApiImplicitParam(name = "loginPsd", value = "User's password", required = true, dataType = "string", paramType = "query"),})
 	public ResultVO<VmanUser> login(String loginName,String loginPsd,HttpServletRequest request) throws Exception {
-	    return entrySystemService.doLogin(loginName,loginPsd,request.getSession());
+		return entrySystemService.doLogin(loginName,loginPsd,request.getSession());
 	 }
 	
 	@RequestLimit(count=30,time=60000)

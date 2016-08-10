@@ -8,10 +8,10 @@ import com.ecan.model.VmanUser;
 public interface BVmanUserService {
 
 	/**
-	 * 登陆操作
+	 * 根据登录信息获取权限，事务控制
 	 * @param vmanUser 登录信息
-	 * @return 返回是否登陆成功
+	 * @return 返回权限信息
 	 */
-	public List<Map<String, Object>> doLogin(VmanUser vmanUser) throws Exception;
+	public List<Map<String, Object>> getAuth(VmanUser vmanUser) throws Exception;
 	
 }

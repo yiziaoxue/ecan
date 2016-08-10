@@ -61,7 +61,7 @@ public class TestAuthorityController {
 		vmanUser.setUserName(username);
 		vmanUser.setUserPsd(password);
 		try {
-			List<Map<String,Object>> list = bVmanUserService.doLogin(vmanUser);
+			List<Map<String,Object>> list = bVmanUserService.getAuth(vmanUser);
 			Set<String> rs = new HashSet<String>();
 			Set<String> ps = new HashSet<String>();
 			for(Map<String,Object> map : list){
