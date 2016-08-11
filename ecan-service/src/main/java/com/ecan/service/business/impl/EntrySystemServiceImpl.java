@@ -29,6 +29,7 @@ import com.ecan.model.VmanUser;
 import com.ecan.model.VmanUserRoleRela;
 import com.ecan.modle.ResultVO;
 import com.ecan.service.business.EntrySystemService;
+import com.ecan.util.MD5Util;
 import com.ecan.util.StringUtil;
 
 /**
@@ -57,13 +58,16 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	 */
 	@Override
 	public ResultVO<VmanUser> doLogin(String loginName,String loginPsd,HttpSession session) {
+		//首先先对密码进行加密处理，利用双层混淆加密
+		loginPsd = MD5Util.getPassWord(loginPsd);
+		
 		ResultVO<VmanUser> result = new ResultVO<VmanUser>();
 		VmanUser vmanUser = new VmanUser();
 		if(checkEmail(loginName))
 			vmanUser.setUserEmail(loginName);
 		else
 			vmanUser.setUserPhone(loginName);
-		vmanUser.setUserPsd(loginPsd);
+		vmanUser.setUserPsd(MD5Util.string2MD5(MD5Util.string2MD5(loginPsd)));
 		
 		if(session.getAttribute(loginName) != null){
 			log.info("缓存中查询");
@@ -121,7 +125,6 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	@Transactional
 	public List<Map<String,Object>> getAuth(VmanUser vmanUser) throws Exception {
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-//		VmanUser vmanUser = vmanUserMapper.findEntity(vmanUser);
 		if(vmanUser != null){
 			VmanUserRoleRela modelUserRoleRela = new VmanUserRoleRela();
 			modelUserRoleRela.setUserid(vmanUser.getUsid());
@@ -153,6 +156,9 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 
 	@Override
 	public ResultVO<VmanUser> doRegist(String loginName,String loginPsd) {
+		//首先先对密码进行加密处理，利用双层混淆加密
+		loginPsd = MD5Util.getPassWord(loginPsd);
+		
 		ResultVO<VmanUser> result = new ResultVO<VmanUser>();
 		VmanUser vmanUser = new VmanUser();
 		if(checkEmail(loginName))

@@ -39,10 +39,10 @@ public class BVmanUserServiceImpl implements BVmanUserService {
 	@Transactional
 	public List<Map<String,Object>> getAuth(VmanUser vmanUser) throws Exception {
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-//		VmanUser vmanUser = vmanUserMapper.findEntity(vmanUser);
-		if(vmanUser != null){
+		VmanUser modelUser = vmanUserMapper.findEntity(vmanUser);
+		if(modelUser != null){
 			VmanUserRoleRela modelUserRoleRela = new VmanUserRoleRela();
-			modelUserRoleRela.setUserid(vmanUser.getUsid());
+			modelUserRoleRela.setUserid(modelUser.getUsid());
 			List<VmanUserRoleRela> listVmanUserRoleRela = vmanUserRoleRelaMapper.findEntityList(modelUserRoleRela);
 			for(VmanUserRoleRela vmanUserRoleRela : listVmanUserRoleRela){
 				VmanRole modelRole = new VmanRole();
