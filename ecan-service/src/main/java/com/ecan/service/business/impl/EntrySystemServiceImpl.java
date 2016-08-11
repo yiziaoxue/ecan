@@ -1,5 +1,7 @@
 package com.ecan.service.business.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -12,14 +14,20 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ecan.annotation.contract.AuthorityContract;
+import com.ecan.mapper.VmanPermMapper;
+import com.ecan.mapper.VmanRoleMapper;
+import com.ecan.mapper.VmanRolePermRelaMapper;
+import com.ecan.mapper.VmanUserMapper;
+import com.ecan.mapper.VmanUserRoleRelaMapper;
 import com.ecan.model.VmanPerm;
 import com.ecan.model.VmanRole;
+import com.ecan.model.VmanRolePermRela;
 import com.ecan.model.VmanUser;
+import com.ecan.model.VmanUserRoleRela;
 import com.ecan.modle.ResultVO;
-import com.ecan.service.VmanUserService;
-import com.ecan.service.business.BVmanUserService;
 import com.ecan.service.business.EntrySystemService;
 import com.ecan.util.StringUtil;
 
@@ -34,10 +42,15 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	private Logger log = Logger.getLogger(EntrySystemServiceImpl.class);
 	
 	@Autowired
-	private VmanUserService vmanUserService;
-	
+	private VmanUserMapper vmanUserMapper;
 	@Autowired
-	private BVmanUserService bVmanUserService;
+	private VmanUserRoleRelaMapper vmanUserRoleRelaMapper;
+	@Autowired
+	private VmanRoleMapper vmanRoleMapper;
+	@Autowired
+	private VmanRolePermRelaMapper vmanRolePermRelaMapper;
+	@Autowired
+	private VmanPermMapper vmanPermMapper;
 	
 	/**
 	 * 现在先这么做，后期可考虑时候mongoDB
@@ -62,7 +75,7 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			log.info("数据库查询");
 //			List<VmanUser> vmanList = null;
 //			try {
-//				vmanList = vmanUserService.findEntityList(vmanUser);
+//				vmanList = vmanUserMapper.findEntityList(vmanUser);
 //			} catch (Exception e) {
 //				log.error("数据库查询失败");
 //				e.printStackTrace();
@@ -75,12 +88,12 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 //			}
 			VmanUser vu = null;
 			try {
-				vu = vmanUserService.findEntity(vmanUser);
+				vu = vmanUserMapper.findEntity(vmanUser);
 				if(vu == null)
 					result.setResult("-1","登录失败，账号密码不匹配");
 				else{
 					//根据登录信息，查询用户的权限信息
-					List<Map<String,Object>> list = bVmanUserService.getAuth(vu);
+					List<Map<String,Object>> list = this.getAuth(vu);
 					Set<String> rs = new HashSet<String>();
 					Set<String> ps = new HashSet<String>();
 					for(Map<String,Object> map : list){
@@ -104,6 +117,39 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 
 		return result;
 	}
+	
+	@Transactional
+	public List<Map<String,Object>> getAuth(VmanUser vmanUser) throws Exception {
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+//		VmanUser vmanUser = vmanUserMapper.findEntity(vmanUser);
+		if(vmanUser != null){
+			VmanUserRoleRela modelUserRoleRela = new VmanUserRoleRela();
+			modelUserRoleRela.setUserid(vmanUser.getUsid());
+			List<VmanUserRoleRela> listVmanUserRoleRela = vmanUserRoleRelaMapper.findEntityList(modelUserRoleRela);
+			for(VmanUserRoleRela vmanUserRoleRela : listVmanUserRoleRela){
+				VmanRole modelRole = new VmanRole();
+				modelRole.setRoid(vmanUserRoleRela.getRoleid());
+				VmanRole vmanRole = vmanRoleMapper.findEntity(modelRole);
+				Map<String,Object> mapRole = new HashMap<String,Object>();
+				mapRole.put("role", vmanRole);
+				list.add(mapRole);
+				
+				VmanRolePermRela modelRolePermRela = new VmanRolePermRela();
+				modelRolePermRela.setRoleid(vmanRole.getRoid());
+				List<VmanRolePermRela> listVmanRolePermRela = vmanRolePermRelaMapper.findEntityList(modelRolePermRela);
+				for(VmanRolePermRela vmanRolePermRela : listVmanRolePermRela){
+					VmanPerm modelPerm = new VmanPerm();
+					modelPerm.setPeid(vmanRolePermRela.getPermid());
+					VmanPerm vmanPerm  = vmanPermMapper.findEntity(modelPerm);
+					Map<String,Object> mapPerm = new HashMap<String,Object>();
+					mapRole.put("perm", vmanPerm);
+					list.add(mapPerm);
+				}
+			}
+			
+		}
+		return list;
+	}
 
 	@Override
 	public ResultVO<VmanUser> doRegist(String loginName,String loginPsd) {
@@ -115,11 +161,11 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			vmanUser.setUserPhone(loginName);
 		vmanUser.setUserPsd(loginPsd);
 		try {
-			List<VmanUser> vmanList = vmanUserService.findEntityList(vmanUser);
+			List<VmanUser> vmanList = vmanUserMapper.findEntityList(vmanUser);
 			if(vmanList.size() > 0)
 				result.setResult("-1", "用户名已存在，请重新输入");
 			else{
-				vmanUserService.addEntity(vmanUser);
+				vmanUserMapper.addEntity(vmanUser);
 				result.setResultCode("0");
 			}
 		} catch (Exception e) {
