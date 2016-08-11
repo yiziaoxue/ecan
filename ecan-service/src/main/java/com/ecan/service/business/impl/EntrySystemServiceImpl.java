@@ -122,6 +122,13 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 		return result;
 	}
 	
+	/**
+	 * 根据用户信息获取用户权限<br/>
+	 * 增加了事务处理，这里权限包括角色和操作权限，两者是密不可分的，所以需要事务控制
+	 * @param vmanUser 用户信息
+	 * @return 返回对应用户的前线
+	 * @throws Exception 主动抛出异常
+	 */
 	@Transactional
 	public List<Map<String,Object>> getAuth(VmanUser vmanUser) throws Exception {
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
