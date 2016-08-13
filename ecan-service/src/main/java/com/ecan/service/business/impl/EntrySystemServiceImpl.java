@@ -67,7 +67,7 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			vmanUser.setUserEmail(loginName);
 		else
 			vmanUser.setUserPhone(loginName);
-		vmanUser.setUserPsd(MD5Util.string2MD5(MD5Util.string2MD5(loginPsd)));
+		vmanUser.setUserPsd(loginPsd);
 		
 		if(session.getAttribute(loginName) != null){
 			log.info("缓存中查询");
