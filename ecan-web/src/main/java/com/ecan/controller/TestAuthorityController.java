@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -35,26 +36,29 @@ public class TestAuthorityController {
 	BVmanUserService bVmanUserService;
 	
 	Logger logger = Logger.getLogger(this.getClass());
+	AuthorityContract authorityContract = new AuthorityContract();
 	
 	@Authority(role = {Role.ADMIN},perm = { Perm.INIT })
 	@RequestMapping("test")
 	@ResponseBody
-	public void test(){
+	public void test(HttpServletRequest request){
 		 Set<String> roles = new HashSet<String>();
 		    roles.add("ROLE_ADMIN");
 		    
 		    Set<String> perms = new HashSet<String>();
 		    perms.add("PERM_READ");
 		    
-		    AuthorityContract.set(roles, perms);
+//		    AuthorityContract.set(roles, perms);
+		    authorityContract.setSession(request.getSession());
 		    
 		    logger.info(testService.getService());
 		    logger.info(testService.getServiceName());
 	}
 	
+	@Authority(role = {Role.ADMIN},perm = { Perm.INIT })
 	@ResponseBody
 	@RequestMapping("/login")
-	public void login(HttpServletResponse response) {
+	public void login(HttpServletRequest request, HttpServletResponse response) {
 		String username = "TaneRoom";
 		String password = "123456";
 		VmanUser vmanUser = new VmanUser();
@@ -73,7 +77,8 @@ public class TestAuthorityController {
 				}
 			}
 			//将用户的权限设置到权限验证算法中
-			AuthorityContract.set(rs, ps);
+			authorityContract.setSession(request.getSession());
+//			AuthorityContract.set(rs, ps);
 			JsonUtil.writeJson(response, list);
 		} catch (Exception e) {
 			JsonUtil.writeJson(response, "[]");

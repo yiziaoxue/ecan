@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ecan.annotation.contract.AuthorityContract;
+import com.ecan.constant.Constant;
 import com.ecan.mapper.VmanPermMapper;
 import com.ecan.mapper.VmanRoleMapper;
 import com.ecan.mapper.VmanRolePermRelaMapper;
@@ -41,6 +42,7 @@ import com.ecan.util.StringUtil;
 public class EntrySystemServiceImpl implements EntrySystemService{
 	
 	private Logger log = Logger.getLogger(EntrySystemServiceImpl.class);
+	private AuthorityContract authorityContract = new AuthorityContract();
 	
 	@Autowired
 	private VmanUserMapper vmanUserMapper;
@@ -69,13 +71,13 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			vmanUser.setUserPhone(loginName);
 		vmanUser.setUserPsd(loginPsd);
 		
-		if(session.getAttribute(loginName) != null){
-			log.info("缓存中查询");
-			if(session.getAttribute(loginName).equals(loginPsd))
-				result.setResult("0",vmanUser);
-			else
-				result.setResult("-1","登录失败，账号密码不匹配");
-		}else{
+//		if(session.getAttribute(loginName) != null){
+//			log.info("缓存中查询");
+//			if(session.getAttribute(loginName).equals(loginPsd))
+//				result.setResult("0",vmanUser);
+//			else
+//				result.setResult("-1","登录失败，账号密码不匹配");
+//		}else{
 			log.info("数据库查询");
 //			List<VmanUser> vmanList = null;
 //			try {
@@ -109,15 +111,18 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 						}
 					}
 					//将用户的权限设置到权限验证算法中
-					AuthorityContract.set(rs, ps);
-					session.setAttribute(loginName, loginPsd);
+//					AuthorityContract.set(rs, ps);
+					authorityContract.setSession(session);
+					session.setAttribute(Constant.SOLES, rs);
+					session.setAttribute(Constant.PERMS, ps);
+//					session.setAttribute(loginName, loginPsd);
 					result.setResult("0",vmanUser);
 				}
 			} catch (Exception e) {
 				log.error("数据库查询失败");
 				e.printStackTrace();
 			}
-		}
+//		}
 
 		return result;
 	}

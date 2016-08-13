@@ -21,6 +21,7 @@ import com.ecan.exception.AuthorityException;
 public class AuthInterceptor extends HandlerInterceptorAdapter {
     
 	private static final Logger logger = Logger.getLogger(AuthInterceptor.class);
+	private static final AuthorityContract authorityContract = new AuthorityContract();
 	
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -41,7 +42,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         
         // 验证方法安全
         try {
-			AuthorityContract.checkPermission(auth);
+        	authorityContract.setSession(request.getSession());
+        	authorityContract.checkPermission(auth);
+			//AuthorityContract.checkPermission(auth);
 		} catch (Exception e) {
 			if(e instanceof AuthorityException){
 				logger.error("Method Authority: " + e.getMessage());
