@@ -23,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableRedisHttpSession
 @EnableSwagger2
 @Configuration
-public class EcanWebApplication  extends SpringBootServletInitializer implements EmbeddedServletContainerCustomizer{
+public class EcanWebApplication{
 
 	private static Logger logger = Logger.getLogger(EcanWebApplication.class);
 	
@@ -32,11 +32,6 @@ public class EcanWebApplication  extends SpringBootServletInitializer implements
 		logger.info("==========服务启动，开始记录==========");
 	}
 
-	@Override
-	public void customize(ConfigurableEmbeddedServletContainer container) {
-		container.setPort(8181);  
-	}
-	
 	@Bean
 	public Docket createRestApi() {
 	    return new Docket(DocumentationType.SWAGGER_2)

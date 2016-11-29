@@ -1,6 +1,8 @@
 package com.ecan.service.business.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,11 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ecan.annotation.contract.AuthorityContract;
 import com.ecan.constant.Constant;
+import com.ecan.mapper.VmanOrderMapper;
 import com.ecan.mapper.VmanPermMapper;
 import com.ecan.mapper.VmanRoleMapper;
 import com.ecan.mapper.VmanRolePermRelaMapper;
 import com.ecan.mapper.VmanUserMapper;
 import com.ecan.mapper.VmanUserRoleRelaMapper;
+import com.ecan.model.VmanOrder;
 import com.ecan.model.VmanPerm;
 import com.ecan.model.VmanRole;
 import com.ecan.model.VmanRolePermRela;
@@ -54,6 +58,9 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	private VmanRolePermRelaMapper vmanRolePermRelaMapper;
 	@Autowired
 	private VmanPermMapper vmanPermMapper;
+	@Autowired
+	private VmanOrderMapper vmanOrderMapper;
+	
 	
 	/**
 	 * 现在先这么做，后期可考虑时候mongoDB
@@ -192,6 +199,25 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 		}
 		return result;
 	}
+	
+	@Override
+	public ResultVO<VmanOrder> doAddOrder(VmanOrder vmanOrder){
+		ResultVO<VmanOrder> result = new ResultVO<VmanOrder>();
+		try {
+			List<VmanOrder> vmanList = vmanOrderMapper.findEntityList(vmanOrder);
+			if(vmanList.size() > 0)
+				result.setResult("-1", "订单已存在，请重新输入");
+			else{
+				vmanOrder.setOrderCode(Getnum());
+				vmanOrderMapper.addEntity(vmanOrder);
+				result.setResultCode("0");
+			}
+		} catch (Exception e) {
+			log.error("数据库查询失败");
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	private boolean checkEmail(String emailStr){
 		 String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";    
@@ -200,4 +226,26 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 		 return matcher.matches();
 	}
 	
+	/** 
+     * 获取现在时间 
+     * @return返回字符串格式yyyyMMddHHmmss 
+     */  
+      public static String getStringDate() {  
+             Date currentTime = new Date();  
+             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");  
+             String dateString = formatter.format(currentTime);  
+             System.out.println("TIME:::"+dateString);  
+             return dateString;  
+          }  
+      /** 
+       * 由年月日时分秒+3位随机数 
+       * 生成流水号 
+       * @return 
+       */  
+      public static String Getnum(){  
+          String t = getStringDate();  
+          int x=(int)(Math.random()*900)+100;  
+          String serial = t + x;  
+          return serial;  
+      }  
 }

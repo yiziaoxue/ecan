@@ -4,7 +4,7 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-30 20:39:02
+ * @since: 2016-11-29 22:20:41
  */
 public class VmanRolePermRela{
 	private Integer rprid;	//权限角色动作关系ID

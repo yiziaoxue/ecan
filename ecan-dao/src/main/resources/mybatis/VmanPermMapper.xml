@@ -3,7 +3,7 @@
 <mapper namespace="com.ecan.mapper.VmanPermMapper">
 
 	<insert id="addEntity">
-		insert into vman_perm(peid,permname,perm,permcolumnid,viewmode) values(#{peid},#{permname},#{perm},#{permcolumnid},#{viewmode})
+		insert into vman_perm(peid,permname,perm,url,funcid,permcolumnid,viewmode) values(#{peid},#{permname},#{perm},#{url},#{funcid},#{permcolumnid},#{viewmode})
 	</insert>
 
 	<delete id="deleteEntity">
@@ -22,6 +22,12 @@
 			<if test="perm != null">
 				perm = #{perm},
 			</if>
+			<if test="url != null">
+				url = #{url},
+			</if>
+			<if test="funcid != null">
+				funcid = #{funcid},
+			</if>
 			<if test="permcolumnid != null">
 				permcolumnid = #{permcolumnid},
 			</if>
@@ -37,6 +43,8 @@
 		peid AS peid,
 		permname AS permname,
 		perm AS perm,
+		url AS url,
+		funcid AS funcid,
 		permcolumnid AS permcolumnid,
 		viewmode AS viewmode
 		from vman_perm
@@ -49,6 +57,12 @@
 		</if>
 		<if test="perm != null">
 			and perm = #{perm}
+		</if>
+		<if test="url != null">
+			and url = #{url}
+		</if>
+		<if test="funcid != null">
+			and funcid = #{funcid}
 		</if>
 		<if test="permcolumnid != null">
 			and permcolumnid = #{permcolumnid}
@@ -63,6 +77,8 @@
 		peid AS peid,
 		permname AS permname,
 		perm AS perm,
+		url AS url,
+		funcid AS funcid,
 		permcolumnid AS permcolumnid,
 		viewmode AS viewmode
 		from vman_perm
@@ -75,6 +91,12 @@
 		</if>
 		<if test="perm != null">
 			and perm = #{perm}
+		</if>
+		<if test="url != null">
+			and url = #{url}
+		</if>
+		<if test="funcid != null">
+			and funcid = #{funcid}
 		</if>
 		<if test="permcolumnid != null">
 			and permcolumnid = #{permcolumnid}

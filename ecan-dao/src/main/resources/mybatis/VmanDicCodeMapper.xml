@@ -3,7 +3,7 @@
 <mapper namespace="com.ecan.mapper.VmanDicCodeMapper">
 
 	<insert id="addEntity">
-		insert into vman_dic_code(code,dic_key,dic_value,dic_desc,create_time,create_oprt,update_time,update_oprt) values(#{code},#{dicKey},#{dicValue},#{dicDesc},#{createTime},#{createOprt},#{updateTime},#{updateOprt})
+		insert into vman_dic_code(dcid,code,dic_key,dic_value,dic_desc,create_time,create_oprt,update_time,update_oprt) values(#{dcid},#{code},#{dicKey},#{dicValue},#{dicDesc},#{createTime},#{createOprt},#{updateTime},#{updateOprt})
 	</insert>
 
 	<delete id="deleteEntity">

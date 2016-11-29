@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @date: 2016-08-03 12:55:34
+ * @since: 2016-11-29 22:20:45
  */
 public class VmanUser{
 	private Integer usid;	//主键

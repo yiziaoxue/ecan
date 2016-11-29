@@ -3,7 +3,7 @@
 <mapper namespace="com.ecan.mapper.VmanRoleMapper">
 
 	<insert id="addEntity">
-		insert into vman_role(roid,rolename,role,createrid,creatername,createdate) values(#{roid},#{rolename},#{role},#{createrid},#{creatername},#{createdate})
+		insert into vman_role(roid,rolename,role,weight,createrid,creatername,createdate) values(#{roid},#{rolename},#{role},#{weight},#{createrid},#{creatername},#{createdate})
 	</insert>
 
 	<delete id="deleteEntity">
@@ -21,6 +21,9 @@
 			</if>
 			<if test="role != null">
 				role = #{role},
+			</if>
+			<if test="weight != null">
+				weight = #{weight},
 			</if>
 			<if test="createrid != null">
 				createrid = #{createrid},
@@ -40,6 +43,7 @@
 		roid AS roid,
 		rolename AS rolename,
 		role AS role,
+		weight AS weight,
 		createrid AS createrid,
 		creatername AS creatername,
 		createdate AS createdate
@@ -53,6 +57,9 @@
 		</if>
 		<if test="role != null">
 			and role = #{role}
+		</if>
+		<if test="weight != null">
+			and weight = #{weight}
 		</if>
 		<if test="createrid != null">
 			and createrid = #{createrid}
@@ -70,6 +77,7 @@
 		roid AS roid,
 		rolename AS rolename,
 		role AS role,
+		weight AS weight,
 		createrid AS createrid,
 		creatername AS creatername,
 		createdate AS createdate
@@ -83,6 +91,9 @@
 		</if>
 		<if test="role != null">
 			and role = #{role}
+		</if>
+		<if test="weight != null">
+			and weight = #{weight}
 		</if>
 		<if test="createrid != null">
 			and createrid = #{createrid}

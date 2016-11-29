@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecan.mapper.VmanOrderMapper">
+
+	<insert id="addEntity">
+		insert into vman_order(usid,order_code,order_name,order_rate,order_remark,order_client,order_follow,create_time,update_time,remarks,order_type,order_time,order_state) values(#{usid},#{orderCode},#{orderName},#{orderRate},#{orderRemark},#{orderClient},#{orderFollow},#{createTime},#{updateTime},#{remarks},#{orderType},#{orderTime},#{orderState})
+	</insert>
+
+	<delete id="deleteEntity">
+		delete from vman_order where usid = #{usid}
+	</delete>
+
+	<update id="updateEntity">
+		update vman_order
+		<set>
+			<if test="usid != null">
+				usid = #{usid},
+			</if>
+			<if test="orderCode != null">
+				order_code = #{orderCode},
+			</if>
+			<if test="orderName != null">
+				order_name = #{orderName},
+			</if>
+			<if test="orderRate != null">
+				order_rate = #{orderRate},
+			</if>
+			<if test="orderRemark != null">
+				order_remark = #{orderRemark},
+			</if>
+			<if test="orderClient != null">
+				order_client = #{orderClient},
+			</if>
+			<if test="orderFollow != null">
+				order_follow = #{orderFollow},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks},
+			</if>
+			<if test="orderType != null">
+				order_type = #{orderType},
+			</if>
+			<if test="orderTime != null">
+				order_time = #{orderTime},
+			</if>
+			<if test="orderState != null">
+				order_state = #{orderState},
+			</if>
+		</set>
+		where usid = #{usid}
+	</update>
+
+	<select id="findEntity" resultType="com.ecan.model.VmanOrder">
+		select
+		usid AS usid,
+		order_code AS orderCode,
+		order_name AS orderName,
+		order_rate AS orderRate,
+		order_remark AS orderRemark,
+		order_client AS orderClient,
+		order_follow AS orderFollow,
+		create_time AS createTime,
+		update_time AS updateTime,
+		remarks AS remarks,
+		order_type AS orderType,
+		order_time AS orderTime,
+		order_state AS orderState
+		from vman_order
+		where 1 = 1
+		<if test="usid != null">
+			and usid = #{usid}
+		</if>
+		<if test="orderCode != null">
+			and order_code = #{orderCode}
+		</if>
+		<if test="orderName != null">
+			and order_name = #{orderName}
+		</if>
+		<if test="orderRate != null">
+			and order_rate = #{orderRate}
+		</if>
+		<if test="orderRemark != null">
+			and order_remark = #{orderRemark}
+		</if>
+		<if test="orderClient != null">
+			and order_client = #{orderClient}
+		</if>
+		<if test="orderFollow != null">
+			and order_follow = #{orderFollow}
+		</if>
+		<if test="createTime != null">
+			and create_time = #{createTime}
+		</if>
+		<if test="updateTime != null">
+			and update_time = #{updateTime}
+		</if>
+		<if test="remarks != null">
+			and remarks = #{remarks}
+		</if>
+		<if test="orderType != null">
+			and order_type = #{orderType}
+		</if>
+		<if test="orderTime != null">
+			and order_time = #{orderTime}
+		</if>
+		<if test="orderState != null">
+			and order_state = #{orderState}
+		</if>
+	</select>
+
+	<select id="findEntityList" resultType="com.ecan.model.VmanOrder">
+		select
+		usid AS usid,
+		order_code AS orderCode,
+		order_name AS orderName,
+		order_rate AS orderRate,
+		order_remark AS orderRemark,
+		order_client AS orderClient,
+		order_follow AS orderFollow,
+		create_time AS createTime,
+		update_time AS updateTime,
+		remarks AS remarks,
+		order_type AS orderType,
+		order_time AS orderTime,
+		order_state AS orderState
+		from vman_order
+		where 1 = 1
+		<if test="usid != null">
+			and usid = #{usid}
+		</if>
+		<if test="orderCode != null">
+			and order_code = #{orderCode}
+		</if>
+		<if test="orderName != null">
+			and order_name = #{orderName}
+		</if>
+		<if test="orderRate != null">
+			and order_rate = #{orderRate}
+		</if>
+		<if test="orderRemark != null">
+			and order_remark = #{orderRemark}
+		</if>
+		<if test="orderClient != null">
+			and order_client = #{orderClient}
+		</if>
+		<if test="orderFollow != null">
+			and order_follow = #{orderFollow}
+		</if>
+		<if test="createTime != null">
+			and create_time = #{createTime}
+		</if>
+		<if test="updateTime != null">
+			and update_time = #{updateTime}
+		</if>
+		<if test="remarks != null">
+			and remarks = #{remarks}
+		</if>
+		<if test="orderType != null">
+			and order_type = #{orderType}
+		</if>
+		<if test="orderTime != null">
+			and order_time = #{orderTime}
+		</if>
+		<if test="orderState != null">
+			and order_state = #{orderState}
+		</if>
+	</select>
+
+
+</mapper>

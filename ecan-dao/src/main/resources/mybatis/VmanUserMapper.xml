@@ -3,7 +3,7 @@
 <mapper namespace="com.ecan.mapper.VmanUserMapper">
 
 	<insert id="addEntity">
-		insert into vman_user(user_phone,user_email,user_psd,user_name,user_sex,user_age,user_birth,user_address,user_hobby,member_code,member_type,card_code,card_type,create_time,last_time,remarks) values(#{userPhone},#{userEmail},#{userPsd},#{userName},#{userSex},#{userAge},#{userBirth},#{userAddress},#{userHobby},#{memberCode},#{memberType},#{cardCode},#{cardType},#{createTime},#{lastTime},#{remarks})
+		insert into vman_user(usid,user_phone,user_email,user_psd,user_name,user_sex,user_age,user_birth,user_address,user_hobby,member_code,member_type,card_code,card_type,create_time,last_time,remarks) values(#{usid},#{userPhone},#{userEmail},#{userPsd},#{userName},#{userSex},#{userAge},#{userBirth},#{userAddress},#{userHobby},#{memberCode},#{memberType},#{cardCode},#{cardType},#{createTime},#{lastTime},#{remarks})
 	</insert>
 
 	<delete id="deleteEntity">

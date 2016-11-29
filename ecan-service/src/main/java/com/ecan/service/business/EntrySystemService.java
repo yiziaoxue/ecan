@@ -2,6 +2,7 @@ package com.ecan.service.business;
 
 import javax.servlet.http.HttpSession;
 
+import com.ecan.model.VmanOrder;
 import com.ecan.model.VmanUser;
 import com.ecan.modle.ResultVO;
 
@@ -25,4 +26,11 @@ public interface EntrySystemService {
 	 * @return
 	 */
 	public ResultVO<VmanUser> doRegist(String loginName,String loginPsd);
+
+	/**
+	 * 下单操作
+	 * @param vmanOrder
+	 * @return
+	 */
+	ResultVO<VmanOrder> doAddOrder(VmanOrder vmanOrder);
 }

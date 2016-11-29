@@ -4,7 +4,7 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-30 20:39:05
+ * @since: 2016-11-29 22:20:47
  */
 public class VmanUserRoleRela{
 	private Integer urrid;	//权限用户角色关联ID

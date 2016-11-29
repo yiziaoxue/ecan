@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * mapper文件，系统自动生成
  * @author: TaneRoom
- * @date: 2016-08-03 12:55:37
+ * @since: 2016-11-29 22:20:48
  */
 @Service("vmanUserService")
 public class VmanUserServiceImpl implements VmanUserService {

@@ -4,12 +4,13 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-30 20:39:01
+ * @since: 2016-11-29 22:20:39
  */
 public class VmanRole{
 	private Integer roid;	//权限角色ID
 	private String rolename;	//权限角色名
 	private String role;	//权限角色字符串
+	private Integer weight;	//权重
 	private Integer createrid;	//创建者ID
 	private String creatername;	//创建者名称
 	private Date createdate;	//创建时间
@@ -37,6 +38,14 @@ public class VmanRole{
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Integer getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Integer weight) {
+		this.weight = weight;
 	}
 
 	public Integer getCreaterid() {

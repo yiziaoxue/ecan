@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * mapper文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-07-30 20:39:08
+ * @since: 2016-11-29 22:20:47
  */
 public interface VmanUserRoleRelaService {
 
