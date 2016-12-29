@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Booking-Manager</title>
+<link rel="stylesheet" href="jquery/jquery-ui.css">
+<link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/signin.css">
+<script src="jquery/jquery.js"></script>
+<script src="view/common.js"></script>
+<script src="jquery/jquery-ui.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.cookie.js"></script>
+</head>
+<body>
+	<div class="page-header">
+		<h1>
+			<b>訂單管理系统 </b><small>用心做好每一次記錄</small>
+		</h1>
+	</div>
+	<div class="panel-body">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<ul class="nav nav-tabs" id="booking-tabs">
+					<li class="active"><a href="#">订单数据</a></li>
+					<li><a href="#">账单数据</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-content">
+					<div class="signin">
+						<div class="signin-head">
+							<img src="images/test/head1.jpg" alt="" class="img-circle">
+						</div>
+						<div class="form-signin" role="form">
+						 	<div class="user icon-position"></div>
+							<input type="text" class="form-control" placeholder="用户名" id="userPhone" required autofocus autocomplete="off"/> 
+							<input type="password" class="form-control" id="passWord" placeholder="密码" required />
+							<button class="btn btn-lg btn-warning btn-block" id="loginButton">登录</button>
+						</div>
+					</div>
+			<!-- /.modal-content -->
+		</div>
+	</div>
+	<div style="margin-top: -30px">
+		<iframe name="center" id="centerFrame" frameborder=0 scrolling="no" width="100%" height="750px"></iframe>
+	</div>
+</body>
+<script src="manager.js"></script>
+</html>

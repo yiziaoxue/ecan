@@ -1,19 +1,14 @@
 package com.ecan.model;
-import java.io.Serializable;
+import java.util.Date;
+import java.util.Date;
 import java.util.Date;
 
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-11-29 22:20:35
+ * @since: 2016-12-27 23:03:05
  */
-public class VmanOrder implements Serializable{
-	/** 
-	 * 2016下午11:13:17 
-	 * ecan-dao
-	 * asus
-	 */ 
-	private static final long serialVersionUID = 1L;
+public class VmanOrder{
 	private Integer usid;	//主键
 	private String orderCode;	//订单号
 	private String orderName;	//订单名
@@ -27,6 +22,7 @@ public class VmanOrder implements Serializable{
 	private String orderType;	//
 	private Date orderTime;	//
 	private Integer orderState;	//
+	private String orderOwner;	//
 
 
 	public Integer getUsid() {
@@ -131,6 +127,14 @@ public class VmanOrder implements Serializable{
 
 	public void setOrderState(Integer orderState) {
 		this.orderState = orderState;
+	}
+
+	public String getOrderOwner() {
+		return orderOwner;
+	}
+
+	public void setOrderOwner(String orderOwner) {
+		this.orderOwner = orderOwner;
 	}
 
 }

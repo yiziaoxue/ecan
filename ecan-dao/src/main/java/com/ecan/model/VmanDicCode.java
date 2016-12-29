@@ -1,5 +1,5 @@
 package com.ecan.model;
-import java.util.Date;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +7,14 @@ import java.util.Date;
  * @author: TaneRoom
  * @since: 2016-11-29 22:20:32
  */
-public class VmanDicCode{
+public class VmanDicCode implements Serializable{
+	/** 
+	 * 2016下午9:22:19 
+	 * ecan-dao
+	 * asus
+	 */ 
+	private static final long serialVersionUID = 1159554696703682214L;
+	
 	private Integer dcid;	//主键
 	private String code;	//标识代码组
 	private String dicKey;	//键

@@ -4,10 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ecan.annotation.contract.AuthorityContract;
 import com.ecan.constant.Constant;
 import com.ecan.mapper.VmanOrderMapper;
 import com.ecan.mapper.VmanPermMapper;
@@ -33,9 +30,11 @@ import com.ecan.model.VmanRolePermRela;
 import com.ecan.model.VmanUser;
 import com.ecan.model.VmanUserRoleRela;
 import com.ecan.modle.ResultVO;
+import com.ecan.param.VmanOrderParam;
 import com.ecan.service.business.EntrySystemService;
+import com.ecan.util.CodeHelp;
 import com.ecan.util.MD5Util;
-import com.ecan.util.StringUtil;
+import com.ecan.util.RedisUtil;
 
 /**
 * @author zhenhua.chun 
@@ -46,7 +45,6 @@ import com.ecan.util.StringUtil;
 public class EntrySystemServiceImpl implements EntrySystemService{
 	
 	private Logger log = Logger.getLogger(EntrySystemServiceImpl.class);
-	private AuthorityContract authorityContract = new AuthorityContract();
 	
 	@Autowired
 	private VmanUserMapper vmanUserMapper;
@@ -60,7 +58,10 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	private VmanPermMapper vmanPermMapper;
 	@Autowired
 	private VmanOrderMapper vmanOrderMapper;
-	
+	@Autowired
+	private CodeHelp codeHelp;
+	@Autowired
+	private RedisUtil redisUtil;
 	
 	/**
 	 * 现在先这么做，后期可考虑时候mongoDB
@@ -78,59 +79,30 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			vmanUser.setUserPhone(loginName);
 		vmanUser.setUserPsd(loginPsd);
 		
-//		if(session.getAttribute(loginName) != null){
-//			log.info("缓存中查询");
-//			if(session.getAttribute(loginName).equals(loginPsd))
-//				result.setResult("0",vmanUser);
-//			else
-//				result.setResult("-1","登录失败，账号密码不匹配");
-//		}else{
+		if(session.getAttribute("loginName") != null && session.getAttribute("loginPsd") != null){
+			log.info("缓存中查询");
+			if(session.getAttribute("loginName").equals(loginName) && session.getAttribute("loginPsd").equals(loginPsd))
+				result.setResult("0",vmanUser);
+			else
+				result.setResult("-1","登录失败，账号密码不匹配");
+		}else{
 			log.info("数据库查询");
-//			List<VmanUser> vmanList = null;
-//			try {
-//				vmanList = vmanUserMapper.findEntityList(vmanUser);
-//			} catch (Exception e) {
-//				log.error("数据库查询失败");
-//				e.printStackTrace();
-//			}
-//			if(vmanList.size() == 0)
-//				result.setResult("-1","登录失败，账号密码不匹配");
-//			else{
-//				session.setAttribute(loginName, loginPsd);
-//				result.setResult("0",vmanUser);
-//			}
 			VmanUser vu = null;
 			try {
 				vu = vmanUserMapper.findEntity(vmanUser);
-				if(vu == null)
-					result.setResult("-1","登录失败，账号密码不匹配");
-				else{
-					//根据登录信息，查询用户的权限信息
-					List<Map<String,Object>> list = this.getAuth(vu);
-					Set<String> rs = new HashSet<String>();
-					Set<String> ps = new HashSet<String>();
-					for(Map<String,Object> map : list){
-						if(!map.isEmpty()){
-							VmanRole vmanRole = (VmanRole) map.get("role");
-							VmanPerm vmanPerm = (VmanPerm) map.get("perm");
-							rs.add(StringUtil.isNullDefault(vmanRole.getRole(),""));
-							ps.add(StringUtil.isNullDefault(vmanPerm.getPerm(),""));
-						}
-					}
-					//将用户的权限设置到权限验证算法中
-//					AuthorityContract.set(rs, ps);
-					authorityContract.setSession(session);
-					session.setAttribute(Constant.SOLES, rs);
-					session.setAttribute(Constant.PERMS, ps);
-//					session.setAttribute(loginName, loginPsd);
-					result.setResult("0",vmanUser);
-				}
 			} catch (Exception e) {
 				log.error("数据库查询失败");
 				e.printStackTrace();
 			}
-//		}
-
+			if(vu == null)
+				result.setResult("-1","登录失败，账号密码不匹配");
+			else{
+				session.setAttribute("loginName", loginName);
+				session.setAttribute("loginPsd", loginPsd);
+				result.setResult("0",vmanUser);
+				redisUtil.set(loginName, vu);
+			}
+		}
 		return result;
 	}
 	
@@ -208,6 +180,7 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			if(vmanList.size() > 0)
 				result.setResult("-1", "订单已存在，请重新输入");
 			else{
+				vmanOrder.setOrderState(codeHelp.getItValue(Constant.DIC_CODE_ORDER_STATE, Constant.ORDER_STATE_NEW_ORDER));
 				vmanOrder.setOrderCode(Getnum());
 				vmanOrderMapper.addEntity(vmanOrder);
 				result.setResultCode("0");
@@ -234,7 +207,6 @@ public class EntrySystemServiceImpl implements EntrySystemService{
              Date currentTime = new Date();  
              SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");  
              String dateString = formatter.format(currentTime);  
-             System.out.println("TIME:::"+dateString);  
              return dateString;  
           }  
       /** 
@@ -247,5 +219,47 @@ public class EntrySystemServiceImpl implements EntrySystemService{
           int x=(int)(Math.random()*900)+100;  
           String serial = t + x;  
           return serial;  
-      }  
+      }
+
+	@Override
+	public ResultVO<List<VmanOrder>> doGetOrder(VmanOrderParam vmanOrder,HttpSession session) {
+		ResultVO<List<VmanOrder>> result = new ResultVO<List<VmanOrder>>();
+		VmanUser vmanUser = CheckVmanUserInfo(session);
+		VmanOrderParam param = new VmanOrderParam();
+		if(vmanOrder.getOrderCode() != null && !vmanOrder.getOrderCode().equals(""))
+			param.setOrderCode(vmanOrder.getOrderCode());
+		if(vmanOrder.getOrderClient() != null && !vmanOrder.getOrderClient().equals(""))
+			param.setOrderClient(vmanOrder.getOrderClient());
+		param.setFirstItem(vmanOrder.getLimit()*vmanOrder.getOffset());
+		param.setOrderOwner(String.valueOf(vmanUser.getUsid()));
+		param.setLastItem(vmanOrder.getLimit()*vmanOrder.getOffset()+vmanOrder.getLimit());
+		try {
+			List<VmanOrder> vmanList = vmanOrderMapper.findEntityList(param);
+			if(vmanList.size() <= 0){
+				result.setResult("-1", "订单不存在，请重新查询");
+			}else{
+				result.setResultCode("0");
+				result.setData(vmanList);
+			}
+		} catch (Exception e) {
+			log.error("数据库查询失败");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public VmanUser CheckVmanUserInfo(HttpSession session){
+		VmanUser vmanUser = (VmanUser)redisUtil.get(String.valueOf(session.getAttribute("loginName")));
+		if(vmanUser == null){
+			vmanUser = new VmanUser();
+			String userName = String.valueOf(session.getAttribute("loginName"));
+			if(checkEmail(userName))
+				vmanUser.setUserEmail(userName);
+			else
+				vmanUser.setUserPhone(userName);
+			vmanUser = vmanUserMapper.findEntity(vmanUser);
+			redisUtil.set(userName, userName);
+		}
+		return vmanUser;
+	}
 }

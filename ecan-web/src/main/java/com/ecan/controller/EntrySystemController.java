@@ -1,5 +1,7 @@
 package com.ecan.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -12,6 +14,7 @@ import com.ecan.annotation.RequestLimit;
 import com.ecan.model.VmanOrder;
 import com.ecan.model.VmanUser;
 import com.ecan.modle.ResultVO;
+import com.ecan.param.VmanOrderParam;
 import com.ecan.service.business.EntrySystemService;
 
 import io.swagger.annotations.Api;
@@ -48,8 +51,9 @@ public class EntrySystemController {
 	@ApiImplicitParams({
 	    @ApiImplicitParam(name = "loginName", value = "User's phone", required = true, dataType = "string", paramType = "query"),
 	    @ApiImplicitParam(name = "loginPsd", value = "User's password", required = true, dataType = "string", paramType = "query"),})
-	public ResultVO<VmanUser> login(String loginName,String loginPsd,HttpServletRequest request) throws Exception {
-		return entrySystemService.doLogin(loginName,loginPsd,request.getSession());
+	public ResultVO<VmanUser> login(VmanUser vmanUser,HttpServletRequest request) throws Exception {
+		ResultVO<VmanUser> vmLst = entrySystemService.doLogin(vmanUser.getUserPhone(),vmanUser.getUserPsd(),request.getSession());
+		return vmLst;
 	 }
 	
 	@RequestLimit(count=30,time=60000)
@@ -70,6 +74,19 @@ public class EntrySystemController {
 	    @ApiImplicitParam(name = "orderClient", value = "Order's client", required = true, dataType = "string", paramType = "query")})
 	public ResultVO<VmanOrder> addOrder(VmanOrder vmanOrder,HttpServletRequest request){
 		return entrySystemService.doAddOrder(vmanOrder);
+	}
+	
+	@RequestLimit(count=30,time=60000)
+	@RequestMapping(value="/getOrderDetail",method=RequestMethod.POST)
+	@ApiOperation(value="查询接口", notes="getCount更多说明")
+	@ApiImplicitParams({
+	    @ApiImplicitParam(name = "orderName", value = "Order's name", required = false, dataType = "string", paramType = "query"),
+	    @ApiImplicitParam(name = "orderClient", value = "Order's client", required = false, dataType = "string", paramType = "query")})
+	public List<VmanOrder> getOrderDetail(VmanOrderParam param,HttpServletRequest request){
+		ResultVO<List<VmanOrder>> result = null;
+		result = entrySystemService.doGetOrder(param,request.getSession());
+		List<VmanOrder> vmanOrderLst = result.getData();
+		return vmanOrderLst;
 	}
 	
 }

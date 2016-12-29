@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>ecan-web</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>ecan-web</name>
 	<description>Demo project for Spring Boot</description>
@@ -31,6 +31,11 @@
 		<dependency>
 			<groupId>com.ecan</groupId>
 			<artifactId>ecan-common</artifactId>
+			<version>V1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ecan</groupId>
+			<artifactId>ecan-dao</artifactId>
 			<version>V1.0</version>
 		</dependency>
 		<dependency>

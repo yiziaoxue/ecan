@@ -1,10 +1,13 @@
 package com.ecan.service.business;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.ecan.model.VmanOrder;
 import com.ecan.model.VmanUser;
 import com.ecan.modle.ResultVO;
+import com.ecan.param.VmanOrderParam;
 
 /**
 * @author zhenhua.chun 
@@ -33,4 +36,11 @@ public interface EntrySystemService {
 	 * @return
 	 */
 	ResultVO<VmanOrder> doAddOrder(VmanOrder vmanOrder);
+	
+	/**
+	 * 查询操作
+	 * @param vmanOrder
+	 * @return
+	 */
+	ResultVO<List<VmanOrder>> doGetOrder(VmanOrderParam param,HttpSession session);
 }

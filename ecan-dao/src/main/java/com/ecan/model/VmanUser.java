@@ -1,4 +1,5 @@
 package com.ecan.model;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Date;
 import java.util.Date;
@@ -8,7 +9,14 @@ import java.util.Date;
  * @author: TaneRoom
  * @since: 2016-11-29 22:20:45
  */
-public class VmanUser{
+public class VmanUser implements Serializable{
+	/** 
+	 * 2016下午10:35:26 
+	 * ecan-dao
+	 * asus
+	 */ 
+	private static final long serialVersionUID = -8682793606470168868L;
+	
 	private Integer usid;	//主键
 	private String userPhone;	//用户手机
 	private String userEmail;	//用户邮箱

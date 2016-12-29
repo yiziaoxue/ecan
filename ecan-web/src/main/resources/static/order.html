@@ -1,0 +1,116 @@
+<link rel="stylesheet" href="css/bootstrap.css"/>
+<link rel="stylesheet" href="css/bootstrap-table.css" />
+<link rel="stylesheet" href="jquery/jquery-ui.css">
+<link rel="stylesheet" href="jquery/style.css">
+
+<script src="jquery/jquery.js"></script>
+<script src="jquery/jquery-ui.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrap-table.js"></script>
+<script src="js/bootstrap-table-zh-CN.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="view/common.js"></script>
+
+<div style="float: left; border: 1px; width: 100%; margin-top: 10px;">
+	<div class="panel-body" style="padding-bottom: 0px;">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div style="float: left; border: 1px;">
+					<div style="float: left; border: 1px; margin-left: 10px">
+						<label>订单编码</label>&nbsp;&nbsp;<input type="text" name="orderCode"
+							id="orderCodeSerch">
+					</div>
+					<div style="float: left; border: 1px; margin-left: 10px">
+						<label>客户名稱</label>&nbsp;&nbsp;<input type="text"
+							name="orderClient" id="orderClientSerch">
+					</div>
+					<div
+						style="float: left; border: 1px; margin-left: 10px; margin-top: -5px">
+						<button id="orderQuery" class="btn btn-primary">查询</button>
+					</div>
+				</div>
+				<div style="float: left; border: 1px; margin-left: 10px; margin-top: -5px">
+					<!-- 按钮触发模态框 -->
+					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加</button>
+					<!-- 模态框（Modal） -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true" style=" margin-top: 5%">
+						<div class="modal-dialog" style="width: 50%">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">新建订单</h4>
+								</div>
+								<div class="modal-body">
+									<form id="orderForm" class="form-inline" role="form">
+										<div class="form-group" style="margin-top: 5px">
+											<label class="form-label">论文名称</label>&nbsp;&nbsp;<input
+												type="text" class="form-control" name="orderName"
+												id="orderName" />
+										</div>
+										<br>
+										<div class="form-group" style="margin-top: 5px">
+											<label class="form-label">客戶名稱</label>&nbsp;&nbsp;<input
+												type="text" class="form-control" name="orderClient"
+												id="orderClient" />
+										</div>
+										<br>
+										<div class="form-group" style="margin-top: 5px">
+											<label class="form-label">交付时间</label>&nbsp;&nbsp;<input
+												type="text" class="form-control" id="datepicker"
+												name="orderTime">
+										</div>
+										<br>
+										<div class="form-group" style="margin-top: 5px">
+											<label class="form-label">订单价格</label>&nbsp;&nbsp;<input
+												type="text" class="form-control" name="orderRate"
+												id="orderRate" />
+										</div>
+										<br>
+										<div class="form-group" style="margin-top: 5px">
+											<label class="form-label">论文写手</label>&nbsp;&nbsp;<input
+												type="text" class="form-control" name="orderFollow"
+												id="orderFollow" />
+										</div>
+										<br>
+										<div class="form-group" style="margin-top: 5px">
+											<label class="form-label">论文进度</label>&nbsp;&nbsp;<select
+												name="orderType" id="orderType">
+												<option value="选题" />选题</option>
+												<option value="开题" />开题</option>
+												<option value="初稿" />初稿</option>
+												<option value="定稿" />定稿</option>
+												<option value="盲审" />盲审</option>
+												<option value="答辩" />答辩</option>
+											</select>
+										</div>
+										<br>
+										<div class="form-group" style="margin-top: 5px">
+											<label class="form-label">论文要求</label>&nbsp;&nbsp;<input
+												type="text" class="form-control" name="orderRemark"
+												id="orderRemark" />
+										</div>
+									</form>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									<button type="button" class="btn btn-primary" id="orderSave">提交</button>
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal -->
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<table id="tb_departments" class="table-bordered table-hover"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="order.js"></script>

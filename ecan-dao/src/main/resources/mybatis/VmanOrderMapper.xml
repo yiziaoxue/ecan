@@ -3,7 +3,7 @@
 <mapper namespace="com.ecan.mapper.VmanOrderMapper">
 
 	<insert id="addEntity">
-		insert into vman_order(usid,order_code,order_name,order_rate,order_remark,order_client,order_follow,create_time,update_time,remarks,order_type,order_time,order_state) values(#{usid},#{orderCode},#{orderName},#{orderRate},#{orderRemark},#{orderClient},#{orderFollow},#{createTime},#{updateTime},#{remarks},#{orderType},#{orderTime},#{orderState})
+		insert into vman_order(usid,order_code,order_name,order_rate,order_remark,order_client,order_follow,create_time,update_time,remarks,order_type,order_time,order_state,order_owner) values(#{usid},#{orderCode},#{orderName},#{orderRate},#{orderRemark},#{orderClient},#{orderFollow},#{createTime},#{updateTime},#{remarks},#{orderType},#{orderTime},#{orderState},#{orderOwner})
 	</insert>
 
 	<delete id="deleteEntity">
@@ -52,6 +52,9 @@
 			<if test="orderState != null">
 				order_state = #{orderState},
 			</if>
+			<if test="orderOwner != null">
+				order_owner = #{orderOwner},
+			</if>
 		</set>
 		where usid = #{usid}
 	</update>
@@ -70,7 +73,8 @@
 		remarks AS remarks,
 		order_type AS orderType,
 		order_time AS orderTime,
-		order_state AS orderState
+		order_state AS orderState,
+		order_owner AS orderOwner
 		from vman_order
 		where 1 = 1
 		<if test="usid != null">
@@ -111,6 +115,9 @@
 		</if>
 		<if test="orderState != null">
 			and order_state = #{orderState}
+		</if>
+		<if test="orderOwner != null">
+			and order_owner = #{orderOwner}
 		</if>
 	</select>
 
@@ -128,7 +135,8 @@
 		remarks AS remarks,
 		order_type AS orderType,
 		order_time AS orderTime,
-		order_state AS orderState
+		order_state AS orderState,
+		order_owner AS orderOwner
 		from vman_order
 		where 1 = 1
 		<if test="usid != null">
@@ -169,6 +177,9 @@
 		</if>
 		<if test="orderState != null">
 			and order_state = #{orderState}
+		</if>
+		<if test="orderOwner != null">
+			and order_owner = #{orderOwner}
 		</if>
 	</select>
 
