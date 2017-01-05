@@ -92,13 +92,17 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 				log.error("数据库查询失败");
 				e.printStackTrace();
 			}
-			if(vu == null)
-				result.setResult("-1","登录失败，账号密码不匹配");
-			else{
+			if(vu == null){
+				vmanUser.setUserPsd(MD5Util.getPassWord(loginPsd));
+				vu = vmanUserMapper.findEntity(vmanUser);
+			}
+			if(vu != null){
 				session.setAttribute("loginName", loginName);
-				session.setAttribute("loginPsd", loginPsd);
+				session.setAttribute("loginPsd", MD5Util.getPassWord(loginPsd));
 				result.setResult("0",vmanUser);
 				redisUtil.set(loginName, vu);
+			}else{
+				result.setResult("-1","登录失败，账号密码不匹配");
 			}
 		}
 		return result;

@@ -133,9 +133,12 @@ $(function() {
 	$( "#datepicker" ).datepicker();
 	
 	$("#orderSave").click(function() {
-		var obj = JSON.parse($.cookie('user'));
+		var str = $.cookie('user');
+		var obj = JSON.parse(str);
 		var data = $('#orderForm').serializeObject();
 		data.orderOwner = obj.usid;
+		alert(obj.usid);
+		alert(data.orderOwner);
 		$.ajax({
 			url:'entrysystem/addOrder',
 			type: "post",
