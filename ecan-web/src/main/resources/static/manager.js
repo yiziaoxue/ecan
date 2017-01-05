@@ -1,4 +1,3 @@
-var loginObj = null;
 
 $('#booking-tabs a').click(function (e) {
 	  e.preventDefault()
@@ -20,7 +19,6 @@ $('#loginButton').click(function(){
 	    },
 	    success: function(data) {
 	    	if(data.resultCode == "0"){
-		    	loginObj = data.data;
 		    	var str = JSON.stringify(data.data); 
 			    $.cookie('user', str, new Date()+1/24/2, "/"); 
 			    loadLoginMsg(data.data);
@@ -39,7 +37,6 @@ function jugdeLogin(){
 		return;
 	}
 	var obj = JSON.parse(str);
-	loginObj = obj;
 	if(obj.userPhone==null || obj.userPsd==null){
 		$('#loginModal').modal('show');
 	}else{

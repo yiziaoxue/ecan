@@ -43,4 +43,12 @@ public interface EntrySystemService {
 	 * @return
 	 */
 	ResultVO<List<VmanOrder>> doGetOrder(VmanOrderParam param,HttpSession session);
+
+	/**
+	 * 修改订单
+	 * @param vmanOrder
+	 * @param session
+	 * @return
+	 */
+	ResultVO<VmanOrder> doUpdateOrder(VmanOrder vmanOrder,HttpSession session);
 }

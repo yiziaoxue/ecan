@@ -89,4 +89,10 @@ public class EntrySystemController {
 		return vmanOrderLst;
 	}
 	
+	@RequestLimit(count=30,time=60000)
+	@RequestMapping(value="/updateOrder",method=RequestMethod.POST)
+	@ApiOperation(value="修改接口", notes="getCount更多说明")
+	public ResultVO<VmanOrder> updateOrder(VmanOrder vmanOrder,HttpServletRequest request){
+		return entrySystemService.doUpdateOrder(vmanOrder, request.getSession());
+	}
 }
