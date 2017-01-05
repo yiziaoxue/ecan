@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * model文件，系统自动生成
  * @author: TaneRoom
- * @since: 2016-12-27 23:03:05
+ * @since: 2017-01-03 22:23:17
  */
 public class VmanOrder{
 	private Integer usid;	//主键
@@ -23,6 +23,7 @@ public class VmanOrder{
 	private Date orderTime;	//
 	private Integer orderState;	//
 	private String orderOwner;	//
+	private Integer payState;	//
 
 
 	public Integer getUsid() {
@@ -135,6 +136,14 @@ public class VmanOrder{
 
 	public void setOrderOwner(String orderOwner) {
 		this.orderOwner = orderOwner;
+	}
+
+	public Integer getPayState() {
+		return payState;
+	}
+
+	public void setPayState(Integer payState) {
+		this.payState = payState;
 	}
 
 }

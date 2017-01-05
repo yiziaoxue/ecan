@@ -12,10 +12,20 @@
 <script src="js/bootstrap.js"></script>
 <script src="js/jquery.cookie.js"></script>
 </head>
+
 <body>
-	<div class="page-header">
+	<div class="page-header" style="background-color:#96b97d">
 		<h1>
 			<b>訂單管理系统 </b><small>用心做好每一次記錄</small>
+			<div style="float:right;margin-right:50px;text-align:center;">
+				<div>
+					<img id="headImage" src="" border=0 class="img-circle" height="80px" width="80px">
+				</div>
+				<div style="float:left;"><h4 id="headName"></h4>
+				</div>
+				<div class="out" style="margin-top:9px">
+				</div>
+			</div>
 		</h1>
 	</div>
 	<div class="panel-body">
@@ -30,7 +40,7 @@
 	</div>
 	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
+		aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 			<div class="modal-content">
 					<div class="signin">
 						<div class="signin-head">

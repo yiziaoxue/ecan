@@ -26,7 +26,7 @@ public class CodeHelp {
 		return String.valueOf(dic.getDicValue());
 	}
 	
-	public int getItValue(String code,String key){
+	public int getIntValue(String code,String key){
 		VmanDicCode dic = (VmanDicCode)redisUtil.get(code);
 		if(dic == null){
 			dic = new VmanDicCode();

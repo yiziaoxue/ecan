@@ -23,8 +23,10 @@ $('#loginButton').click(function(){
 		    	loginObj = data.data;
 		    	var str = JSON.stringify(data.data); 
 			    $.cookie('user', str, new Date()+1/24/2, "/"); 
-			    $('#loginModal').modal('hide');
-			    $("#centerFrame").attr("src", "order.html");
+			    loadLoginMsg(data.data);
+	    	}else{
+	    		$('#loginModal').modal('show');
+	    		console.log('登陸失敗,原因:'+data.resultMsg);
 	    	}
 	   }
 	});
@@ -54,8 +56,12 @@ function jugdeLogin(){
 				$('#loginModal').modal('show');
 		    },
 		    success: function(data) {
-		    	$('#loginModal').modal('hide');
-		    	$("#centerFrame").attr("src", "order.html")
+		    	if(data.resultCode == "0"){
+				    loadLoginMsg(data.data);
+		    	}else{
+		    		$('#loginModal').modal('show');
+		    		console.log('登陸失敗,原因:'+data.resultMsg);
+		    	}
 		   }
 		});
 	}
@@ -64,3 +70,13 @@ function jugdeLogin(){
 $(document).ready(function(){
 	jugdeLogin();
 });
+
+function loadLoginMsg(loginObj){
+    $('#loginModal').modal('hide');
+    $("#centerFrame").attr("src", "order.html");
+    if(loginObj.userSex == 0)
+    	$('#headImage').attr('src','images/head-man.png');
+    else
+    	$('#headImage').attr('src','images/head-girl.png');
+    $('#headName').html(loginObj.userName);
+}

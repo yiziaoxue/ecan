@@ -68,24 +68,22 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	 */
 	@Override
 	public ResultVO<VmanUser> doLogin(String loginName,String loginPsd,HttpSession session) {
-		//首先先对密码进行加密处理，利用双层混淆加密
-		loginPsd = MD5Util.getPassWord(loginPsd);
-		
 		ResultVO<VmanUser> result = new ResultVO<VmanUser>();
-		VmanUser vmanUser = new VmanUser();
-		if(checkEmail(loginName))
-			vmanUser.setUserEmail(loginName);
-		else
-			vmanUser.setUserPhone(loginName);
-		vmanUser.setUserPsd(loginPsd);
-		
 		if(session.getAttribute("loginName") != null && session.getAttribute("loginPsd") != null){
-			log.info("缓存中查询");
+			log.info("缓存中查询"+session.getAttribute("loginName")+"--"+session.getAttribute("loginPsd"));
 			if(session.getAttribute("loginName").equals(loginName) && session.getAttribute("loginPsd").equals(loginPsd))
-				result.setResult("0",vmanUser);
+				result.setResult("0",(VmanUser)redisUtil.get(loginName));
+			else if(session.getAttribute("loginName").equals(loginName) && session.getAttribute("loginPsd").equals(MD5Util.getPassWord(loginPsd)))
+				result.setResult("0",(VmanUser)redisUtil.get(loginName));
 			else
 				result.setResult("-1","登录失败，账号密码不匹配");
 		}else{
+			VmanUser vmanUser = new VmanUser();
+			if(checkEmail(loginName))
+				vmanUser.setUserEmail(loginName);
+			else
+				vmanUser.setUserPhone(loginName);
+			vmanUser.setUserPsd(loginPsd);
 			log.info("数据库查询");
 			VmanUser vu = null;
 			try {
@@ -180,8 +178,11 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			if(vmanList.size() > 0)
 				result.setResult("-1", "订单已存在，请重新输入");
 			else{
-				vmanOrder.setOrderState(codeHelp.getItValue(Constant.DIC_CODE_ORDER_STATE, Constant.ORDER_STATE_NEW_ORDER));
+				vmanOrder.setOrderState(codeHelp.getIntValue(Constant.DIC_CODE_ORDER_STATE, Constant.ORDER_STATE_NEW_ORDER));
+				vmanOrder.setOrderType(codeHelp.getStringValue(Constant.DIC_CODE_ORDER_TYPE, Constant.ORDER_TYPE_CHOOSE_TOPIC));
+				vmanOrder.setPayState(codeHelp.getIntValue(Constant.DIC_CODE_PAY_STATE, Constant.PAY_STATE_NO_PAY));
 				vmanOrder.setOrderCode(Getnum());
+				vmanOrder.setCreateTime(new Date());
 				vmanOrderMapper.addEntity(vmanOrder);
 				result.setResultCode("0");
 			}

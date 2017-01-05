@@ -1,3 +1,4 @@
+var ButtonFlag = false;
 $(function() {
 	$('#tb_departments').bootstrapTable(
 					{
@@ -27,6 +28,7 @@ $(function() {
 						columns : [
 								{
 									field : 'usid',
+									align : 'center',
 									title : '序号',
 									formatter : function(value, row, index) {
 										return index + 1;
@@ -34,47 +36,60 @@ $(function() {
 								},
 								{
 									field : 'orderCode',
+									align : 'center',
 									title : '订单编码'
 								},
 								{
 									field : 'orderName',
+									align : 'center',
 									title : '订单名称'
 								},
 								{
 									field : 'orderClient',
+									align : 'center',
 									title : '客戶名称'
 								},
 								{
 									field : 'orderRate',
+									align : 'center',
 									title : '订单价格'
 								},
 								{
 									field : 'orderFollow',
+									align : 'center',
 									title : '订单负责人'
 								},{
 									field : 'orderState',
+									align : 'center',
 									title : '订单状态',
 									formatter : function(value){
-										console.log(value);
-										switch(value){
-											case 0 :
-												return "新建";
-											case 1 :
-												return "进行中";
-											case 2 :
-												return "取消";
-											case 4 :
-												return "已完成";
-										}
+										return GetOrderState(value);
 									}
 								},{
 									field : 'orderType',
-									title : '订单进度'
+									align : 'center',
+									title : '订单进度',
+									formatter : function(value){
+										return GetOrderType(value);
+									}
+								},{
+									field : 'payState',
+									align : 'center',
+									title : '支付状态',
+									formatter : function(value){
+										return GetPayState(value);
+									}
 								},{
 									field : 'createTime',
-									title : '下单时间'
+									align : 'center',
+									title : '下单时间',
+									formatter : function(value){
+										 var date = new Date(value);
+										 return date.getFullYear()+"-"+(date.getMonth())+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+									}
 								},{
-									field : 'remarks',
+									field : 'orderRemark',
+									align : 'center',
 									title : '备注'
 								},
 								{
@@ -82,11 +97,7 @@ $(function() {
 									field : '',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<button class="btn btn-primary" onclick="edit(\''
-												+ row.id + '\')">编辑</button>&nbsp;&nbsp;';
-										var d = '<button class="btn btn-primary" onclick="del(\''
-												+ row.id + '\')">删除</button> ';
-										return e + d;
+										return '<button class="btn btn-primary" onclick="UpdateButtonChange(this)">编辑</button>';
 									}
 								} ]
 						/*onClickRow : function(row, $element) {
@@ -142,6 +153,18 @@ $(function() {
 	});
 });
 
+function UpdateButtonChange(_this){
+	if(!ButtonFlag){
+		$(_this).html("更新");
+		$(_this).css("background","Gold");
+		ButtonFlag = true;	
+	}else{
+		$(_this).html("編輯");
+		$(_this).css("background","#337ab7");
+		ButtonFlag = false;	
+	}
+}
+
 function queryParams(params) {
 	var temp = { // 这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 		limit : params.limit, // 页面大小
@@ -157,3 +180,133 @@ function FormatDate (strTime) {
     return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 }
 
+function GetOrderState(value){
+	var e = '<select style="border: 0; background: transparent;"><option value="0" select="select">新建</option>'+
+		'<option value="1">进行中</option>'+
+		'<option value="2">取消</option>'+
+		'<option value="3">已完成</option></select>';
+switch(value){
+	case 0 :
+		e = '<select style="border: 0; background: transparent;"><option value="0" select="select">新建</option>'+
+			'<option value="1">进行中</option>'+
+			'<option value="2">取消</option>'+
+			'<option value="3">已完成</option></select>';
+		return e;
+	case 1 :
+		e = '<select style="border: 0; background: transparent;"><option value="0">新建</option>'+
+			'<option value="1" select="select">进行中</option>'+
+			'<option value="2">取消</option>'+
+			'<option value="3">已完成</option></select>';
+		return e;
+	case 2 :
+		e = '<select style="border: 0; background: transparent;"><option value="0">新建</option>'+
+			'<option value="1">进行中</option>'+
+			'<option value="2" select="select">取消</option>'+
+			'<option value="3">已完成</option></select>';
+		return e;
+	case 3 :
+		e = '<select><option value="0">新建</option>'+
+			'<option value="1">进行中</option>'+
+			'<option value="2">取消</option>'+
+			'<option value="3" select="select">已完成</option></select>';
+		return e;
+	default : 
+		return e;
+	}
+}
+
+function GetOrderType(value){
+	var e = '<select style="border: 0; background: transparent;"><option value="0" select="select">选题</option>'+
+		'<option value="1">开题</option>'+
+		'<option value="2">初稿</option>'+
+		'<option value="3">定稿</option>'+
+		'<option value="4">盲审</option>'+
+		'<option value="5">答辩</option></select>';
+switch(value){
+	case 0 :
+		e = '<select style="border: 0; background: transparent;"><option value="0" select="select">选题</option>'+
+			'<option value="1">开题</option>'+
+			'<option value="2">初稿</option>'+
+			'<option value="3">定稿</option>'+
+			'<option value="4">盲审</option>'+
+			'<option value="5">答辩</option></select>';
+		return e;
+	case 1 :
+		e = '<select style="border: 0; background: transparent;"><option value="0" select="select">选题</option>'+
+			'<option value="1" select="select">开题</option>'+
+			'<option value="2">初稿</option>'+
+			'<option value="3">定稿</option>'+
+			'<option value="4">盲审</option>'+
+			'<option value="5">答辩</option></select>';
+		return e;
+	case 2 :
+		e = '<select style="border: 0; background: transparent;"><option value="0">选题</option>'+
+			'<option value="1">开题</option>'+
+			'<option value="2" select="select">初稿</option>'+
+			'<option value="3">定稿</option>'+
+			'<option value="4">盲审</option>'+
+			'<option value="5">答辩</option></select>';
+		return e;
+	case 3 :
+		e = '<select style="border: 0; background: transparent;"><option value="0">选题</option>'+
+			'<option value="1">开题</option>'+
+			'<option value="2">初稿</option>'+
+			'<option value="3" select="select">定稿</option>'+
+			'<option value="4">盲审</option>'+
+			'<option value="5">答辩</option></select>';
+		return e;
+	case 4 :
+		e = '<select style="border: 0; background: transparent;"><option value="0">选题</option>'+
+			'<option value="1">开题</option>'+
+			'<option value="2">初稿</option>'+
+			'<option value="3">定稿</option>'+
+			'<option value="4" select="select">盲审</option>'+
+			'<option value="5">答辩</option></select>';
+		return e;
+	case 5 :
+		e = '<select style="border: 0; background: transparent;"><option value="0">选题</option>'+
+			'<option value="1">开题</option>'+
+			'<option value="2">初稿</option>'+
+			'<option value="3">定稿</option>'+
+			'<option value="4">盲审</option>'+
+			'<option value="5" select="select">答辩</option></select>';
+		return e;
+	default :
+		return e;
+}
+}
+
+function GetPayState(value){
+	var e = '<select style="border: 0; background: transparent;"><option value="0" select="select">未付款</option>'+
+		'<option value="1">已付款</option>'+
+		'<option value="2">退款中</option>'+
+		'<option value="3">已退款</option></select>';
+switch(value){
+	case 0 :
+		e = '<select style="border: 0; background: transparent;"><option value="0" select="select">未付款</option>'+
+			'<option value="1">已付款</option>'+
+			'<option value="2">退款中</option>'+
+			'<option value="3">已退款</option></select>';
+		return e;
+	case 1 :
+		e = '<select style="border: 0; background: transparent;"><option value="0">未付款</option>'+
+			'<option value="1" select="select">已付款</option>'+
+			'<option value="2">退款中</option>'+
+			'<option value="3">已退款</option></select>';
+		return e;
+	case 2 :
+		e = '<select style="border: 0; background: transparent;"><option value="0">未付款</option>'+
+			'<option value="1">已付款</option>'+
+			'<option value="2" select="select">退款中</option>'+
+			'<option value="3">已退款</option></select>';
+		return e;
+	case 3 :
+		e = '<select><option value="0">未付款</option>'+
+			'<option value="1">已付款</option>'+
+			'<option value="2">退款中</option>'+
+			'<option value="3" select="select">已退款</option></select>';
+		return e;
+	default :
+		return e;
+}
+}

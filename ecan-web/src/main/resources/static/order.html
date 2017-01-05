@@ -34,7 +34,7 @@
 					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加</button>
 					<!-- 模态框（Modal） -->
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true" style=" margin-top: 5%">
+						aria-labelledby="myModalLabel" aria-hidden="true" style=" margin-top: 5%" data-backdrop="static" data-keyboard="false">
 						<div class="modal-dialog" style="width: 50%">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -77,12 +77,12 @@
 										<div class="form-group" style="margin-top: 5px">
 											<label class="form-label">论文进度</label>&nbsp;&nbsp;<select
 												name="orderType" id="orderType">
-												<option value="选题" />选题</option>
-												<option value="开题" />开题</option>
-												<option value="初稿" />初稿</option>
-												<option value="定稿" />定稿</option>
-												<option value="盲审" />盲审</option>
-												<option value="答辩" />答辩</option>
+												<option value="0" />选题</option>
+												<option value="1" />开题</option>
+												<option value="2" />初稿</option>
+												<option value="3" />定稿</option>
+												<option value="4" />盲审</option>
+												<option value="5" />答辩</option>
 											</select>
 										</div>
 										<br>
