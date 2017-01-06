@@ -30,6 +30,7 @@ $(function() {
 									field : 'usid',
 									align : 'center',
 									title : '序号',
+									width : '5%',
 									formatter : function(value, row, index) {
 										return index + 1;
 									}
@@ -37,30 +38,36 @@ $(function() {
 								{
 									field : 'orderCode',
 									align : 'center',
+									width : '5%',
 									title : '订单编码'
 								},
 								{
 									field : 'orderName',
 									align : 'center',
+									width : '5%',
 									title : '订单名称'
 								},
 								{
 									field : 'orderClient',
 									align : 'center',
+									width : '5%',
 									title : '客戶名称'
 								},
 								{
 									field : 'orderRate',
 									align : 'center',
+									width : '5%',
 									title : '订单价格'
 								},
 								{
 									field : 'orderFollow',
 									align : 'center',
+									width : '5%',
 									title : '订单负责人'
 								},{
 									field : 'orderState',
 									align : 'center',
+									width : '5%',
 									title : '订单状态',
 									formatter : function(value, row, index){
 										return GetOrderState(value, row, index);
@@ -68,6 +75,7 @@ $(function() {
 								},{
 									field : 'orderType',
 									align : 'center',
+									width : '5%',
 									title : '订单进度',
 									formatter : function(value, row, index){
 										return GetOrderType(value, row, index);
@@ -75,6 +83,7 @@ $(function() {
 								},{
 									field : 'payState',
 									align : 'center',
+									width : '5%',
 									title : '支付状态',
 									formatter : function(value, row, index){
 										return GetPayState(value, row, index);
@@ -82,6 +91,7 @@ $(function() {
 								},{
 									field : 'createTime',
 									align : 'center',
+									width : '5%',
 									title : '下单时间',
 									formatter : function(value){
 										 var date = new Date(value);
@@ -90,11 +100,12 @@ $(function() {
 								},{
 									field : 'orderRemark',
 									align : 'center',
+									width : '10%',
 									title : '备注'
 								},
 								{
 									title : '操作',
-									field : '',
+									width : '5%',
 									align : 'center',
 									formatter : function(value, row, index) {
 										return '<button class="btn btn-primary" onclick="UpdateButtonChange(this,'+ index +')">编辑</button>';
