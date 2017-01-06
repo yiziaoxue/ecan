@@ -99,7 +99,7 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			if(vu != null){
 				session.setAttribute("loginName", loginName);
 				session.setAttribute("loginPsd", MD5Util.getPassWord(loginPsd));
-				result.setResult("0",vmanUser);
+				result.setResult("0",vu);
 				redisUtil.set(loginName, vu);
 			}else{
 				result.setResult("-1","登录失败，账号密码不匹配");
