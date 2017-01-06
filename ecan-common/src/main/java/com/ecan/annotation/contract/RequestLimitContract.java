@@ -1,7 +1,5 @@
 package com.ecan.annotation.contract;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.aspectj.lang.JoinPoint;
@@ -10,12 +8,12 @@ import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import com.ecan.annotation.RequestLimit;
 import com.ecan.exception.RequestLimitException;
 import com.ecan.util.HttpRequestUtil;
+import com.ecan.util.RedisUtil;
 
 /**
 * @author zhenhua.chun 
@@ -28,8 +26,8 @@ import com.ecan.util.HttpRequestUtil;
 @Component
 public class RequestLimitContract {
 	private static final Logger logger = LoggerFactory.getLogger("RequestLimitLogger");
-	  @Autowired
-	  private RedisTemplate<String, String> redisTemplate;
+	@Autowired
+	private RedisUtil redisUtil;
 
 	  @Before("within(@org.springframework.web.bind.annotation.RestController *) && @annotation(limit)")
 	  public void requestLimit(final JoinPoint joinPoint,RequestLimit limit) throws RequestLimitException {
@@ -49,9 +47,9 @@ public class RequestLimitContract {
 	      String ip = HttpRequestUtil.getIpAddress(request);
 	      String url = request.getRequestURL().toString();
 	      String key = "req_limit_".concat(url).concat(ip);
-	      long count = redisTemplate.opsForValue().increment(key, 1);
+	      long count = redisUtil.set(key, 1);
 	      if (count == 1) {
-	        redisTemplate.expire(key, limit.time(), TimeUnit.MILLISECONDS);
+	    	  redisUtil.expire(key, limit.time());
 	      }
 	      if (count > limit.count()) {
 	        System.out.println("用户IP[" + ip + "]访问地址[" + url + "]超过了限定的次数[" + limit.count() + "]");
