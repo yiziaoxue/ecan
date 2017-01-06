@@ -4,21 +4,22 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
 
 /**
  * redicache 工具类
  * 
  */
-@Component
 public class RedisUtil {
 	@SuppressWarnings("rawtypes")
-	@Autowired
-	private RedisTemplate redisTemplate;
-
+	
+	private RedisTemplate<Serializable, Object> redisTemplate;
+	
+	public RedisUtil(RedisTemplate redisTemplate){
+		this.redisTemplate = redisTemplate;
+	}
+	
 	/**
 	 * 批量删除对应的value
 	 * 
@@ -93,7 +94,14 @@ public class RedisUtil {
 		}
 		return result;
 	}
+	
+	public long set(String key,long value){
+		return redisTemplate.opsForValue().increment(key, value);
+	}
 
+	public void expire(final String key, long time){
+		 redisTemplate.expire(key, time, TimeUnit.MILLISECONDS);
+	}
 	/**
 	 * 写入缓存
 	 * 
