@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * mapper文件，系统自动生成
  * @author: TaneRoom
- * @since: 2017-01-03 22:23:31
+ * @since: 2017-01-08 21:34:52
  */
 @Service("vmanOrderService")
 public class VmanOrderServiceImpl implements VmanOrderService {

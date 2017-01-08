@@ -3,7 +3,7 @@
 <mapper namespace="com.ecan.mapper.VmanOrderMapper">
 
 	<insert id="addEntity">
-		insert into vman_order(usid,order_code,order_name,order_rate,order_remark,order_client,order_follow,create_time,update_time,remarks,order_type,order_time,order_state,order_owner,pay_state) values(#{usid},#{orderCode},#{orderName},#{orderRate},#{orderRemark},#{orderClient},#{orderFollow},#{createTime},#{updateTime},#{remarks},#{orderType},#{orderTime},#{orderState},#{orderOwner},#{payState})
+		insert into vman_order(usid,order_code,order_name,order_rate,order_remark,order_client,order_follow,create_time,update_time,remarks,order_type,order_time,order_state,order_owner,pay_state,flag,order_balance) values(#{usid},#{orderCode},#{orderName},#{orderRate},#{orderRemark},#{orderClient},#{orderFollow},#{createTime},#{updateTime},#{remarks},#{orderType},#{orderTime},#{orderState},#{orderOwner},#{payState},#{flag},#{orderBalance})
 	</insert>
 
 	<delete id="deleteEntity">
@@ -58,6 +58,12 @@
 			<if test="payState != null">
 				pay_state = #{payState},
 			</if>
+			<if test="flag != null">
+				flag = #{flag},
+			</if>
+			<if test="orderBalance != null">
+				order_balance = #{orderBalance},
+			</if>
 		</set>
 		where usid = #{usid}
 	</update>
@@ -78,7 +84,9 @@
 		order_time AS orderTime,
 		order_state AS orderState,
 		order_owner AS orderOwner,
-		pay_state AS payState
+		pay_state AS payState,
+		flag AS flag,
+		order_balance AS orderBalance
 		from vman_order
 		where 1 = 1
 		<if test="usid != null">
@@ -125,6 +133,12 @@
 		</if>
 		<if test="payState != null">
 			and pay_state = #{payState}
+		</if>
+		<if test="flag != null">
+			and flag = #{flag}
+		</if>
+		<if test="orderBalance != null">
+			and order_balance = #{orderBalance}
 		</if>
 	</select>
 
@@ -144,7 +158,9 @@
 		order_time AS orderTime,
 		order_state AS orderState,
 		order_owner AS orderOwner,
-		pay_state AS payState
+		pay_state AS payState,
+		flag AS flag,
+		order_balance AS orderBalance
 		from vman_order
 		where 1 = 1
 		<if test="usid != null">
@@ -191,6 +207,12 @@
 		</if>
 		<if test="payState != null">
 			and pay_state = #{payState}
+		</if>
+		<if test="flag != null">
+			and flag = #{flag}
+		</if>
+		<if test="orderBalance != null">
+			and order_balance = #{orderBalance}
 		</if>
 	</select>
 

@@ -183,7 +183,7 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 				result.setResult("-1", "订单已存在，请重新输入");
 			else{
 				vmanOrder.setOrderState(codeHelp.getIntValue(Constant.DIC_CODE_ORDER_STATE, Constant.ORDER_STATE_NEW_ORDER));
-				vmanOrder.setOrderType(codeHelp.getStringValue(Constant.DIC_CODE_ORDER_TYPE, Constant.ORDER_TYPE_CHOOSE_TOPIC));
+				vmanOrder.setOrderType(codeHelp.getIntValue(Constant.DIC_CODE_ORDER_TYPE, Constant.ORDER_TYPE_CHOOSE_TOPIC));
 				vmanOrder.setPayState(codeHelp.getIntValue(Constant.DIC_CODE_PAY_STATE, Constant.PAY_STATE_NO_PAY));
 				vmanOrder.setOrderCode(Getnum());
 				vmanOrder.setCreateTime(new Date());
@@ -236,6 +236,7 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 		if(vmanOrder.getOrderClient() != null && !vmanOrder.getOrderClient().equals(""))
 			param.setOrderClient(vmanOrder.getOrderClient());
 		param.setFirstItem(vmanOrder.getLimit()*vmanOrder.getOffset());
+		param.setFlag(Constant.POP_STATE_TREU);
 		param.setOrderOwner(String.valueOf(vmanUser.getUsid()));
 		param.setLastItem(vmanOrder.getLimit()*vmanOrder.getOffset()+vmanOrder.getLimit());
 		try {
@@ -276,7 +277,7 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 			if(resultCode <= 0)
 				result.setResult("-1", "订单修改失败");
 			else{
-				vmanOrderMapper.addEntity(vmanOrder);
+				vmanOrderMapper.updateEntity(vmanOrder);
 				result.setResultCode("0");
 			}
 		} catch (Exception e) {
