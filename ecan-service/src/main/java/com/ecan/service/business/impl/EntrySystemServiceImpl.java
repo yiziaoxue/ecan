@@ -273,11 +273,11 @@ public class EntrySystemServiceImpl implements EntrySystemService{
 	public ResultVO<VmanOrder> doUpdateOrder(VmanOrder vmanOrder, HttpSession session) {
 		ResultVO<VmanOrder> result = new ResultVO<VmanOrder>();
 		try {
+			vmanOrder.setUpdateTime(new Date());
 			int resultCode = vmanOrderMapper.updateEntity(vmanOrder);
 			if(resultCode <= 0)
 				result.setResult("-1", "订单修改失败");
 			else{
-				vmanOrderMapper.updateEntity(vmanOrder);
 				result.setResultCode("0");
 			}
 		} catch (Exception e) {
