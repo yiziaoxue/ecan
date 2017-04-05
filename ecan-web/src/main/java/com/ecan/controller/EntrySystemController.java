@@ -3,6 +3,7 @@ package com.ecan.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.ecan.model.VmanUser;
 import com.ecan.modle.ResultVO;
 import com.ecan.param.VmanOrderParam;
 import com.ecan.service.business.EntrySystemService;
+import com.ecan.service.business.impl.FileLoadServiceImple;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -36,6 +38,8 @@ public class EntrySystemController {
 	
 	@Autowired
 	private EntrySystemService entrySystemService;
+	@Autowired
+	private FileLoadServiceImple fleLoadServiceImple;
 	
 	@RequestLimit(count=30,time=60000)
 	@RequestMapping(value="entry",method=RequestMethod.GET)
@@ -94,5 +98,10 @@ public class EntrySystemController {
 	@ApiOperation(value="修改接口", notes="getCount更多说明")
 	public ResultVO<VmanOrder> updateOrder(VmanOrder vmanOrder,HttpServletRequest request){
 		return entrySystemService.doUpdateOrder(vmanOrder, request.getSession());
+	}
+	
+	@RequestMapping(value="/downLoadFile",method=RequestMethod.GET)
+	public void downLoadFile(HttpServletResponse response){
+		fleLoadServiceImple.fileDownLoad(response);
 	}
 }
